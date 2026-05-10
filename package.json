@@ -9,11 +9,20 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "vite": "^7.2.4"
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "vite": "^8.0.9"
   },
   "dependencies": {
-    "@tailwindcss/vite": "^4.1.18",
-    "tailwindcss": "^4.1.18",
+    "@tailwindcss/vite": "^4.2.4",
+    "gsap": "^3.14.2",
+    "lil-gui": "^0.21.0",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "react-icons": "^5.5.0",
+    "stats.js": "^0.17.0",
+    "tailwindcss": "^4.2.4",
     "three": "^0.182.0"
   }
 }

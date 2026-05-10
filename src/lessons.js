@@ -1,0 +1,51 @@
+export const lessons = [
+  {
+    slug: '2-basics',
+    title: 'Basics',
+    url: '/lessons/2-basics/',
+    youtubeUrl: 'https://www.youtube.com/watch?v=JY-IbEambwE&list=PLVFwdndx21r7HzdqCq6pZbuJXtsyyjSc4&index=3',
+    tags: ['three.js'],
+  },
+  {
+    slug: '3-basics2',
+    title: 'Basics II',
+    url: '/lessons/3-basics2/',
+    youtubeUrl: 'https://www.youtube.com/watch?v=QciuicjBwOQ&list=PLVFwdndx21r7HzdqCq6pZbuJXtsyyjSc4&index=4',
+    tags: ['three.js'],
+  },
+  {
+    slug: '4-responsive-design',
+    title: 'Responsive design',
+    url: '/lessons/4-responsive-design/',
+    youtubeUrl: 'https://www.youtube.com/watch?v=BWg5h9oCaao&list=PLVFwdndx21r7HzdqCq6pZbuJXtsyyjSc4&index=5',
+    tags: ['three.js'],
+  },
+  {
+    slug: '6-buffer-geometry',
+    title: 'Buffer geometry',
+    url: '/lessons/6-buffer-geometry/',
+    youtubeUrl: 'https://www.youtube.com/watch?v=hY4syXPiIvc&list=PLVFwdndx21r7HzdqCq6pZbuJXtsyyjSc4&index=6',
+    tags: ['three.js'],
+  },
+  {
+    slug: '7-cameras-controls',
+    title: 'Cameras & controls',
+    url: '/lessons/7-cameras-controls/',
+    youtubeUrl: 'https://www.youtube.com/watch?v=1gpUWlSubsw&list=PLVFwdndx21r7HzdqCq6pZbuJXtsyyjSc4&index=7',
+    tags: ['three.js'],
+  },
+  {
+    slug: '8-materials',
+    title: 'Materials',
+    url: '/lessons/8-materials/',
+    youtubeUrl: 'https://www.youtube.com/watch?v=raXF6Ipt00c&list=PLVFwdndx21r7HzdqCq6pZbuJXtsyyjSc4&index=8',
+    tags: ['three.js'],
+  },
+  {
+    slug: '9-debug',
+    title: 'Debug (GUI & stats)',
+    url: '/lessons/9-debug/',
+    youtubeUrl: 'https://www.youtube.com/watch?v=lS3SnFx0jpY&list=PLVFwdndx21r7HzdqCq6pZbuJXtsyyjSc4&index=9',
+    tags: ['three.js', 'lil-gui', 'stats.js'],
+  }
+]

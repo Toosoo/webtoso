@@ -1,7 +1,32 @@
-# Three.js Course Repository
+# Three.js course
 
-This repository contains the source code for the Three.js course. Each specific lesson mimics a branch name, allowing you to easily switch between different stages of the course.
+## Run the project
+
+```bash
+npm install
+npm run dev
+```
+
+Then open **http://localhost:5173/** in your browser.
+
+## Browse the lessons
+
+The home page lists all lessons. Click a lesson to open it, or go straight to a URL like **http://localhost:5173/lessons/2-basics/** (change the last part to match the lesson you want).
 
 ---
 
-كل درس محدد يمثل اسم فرع مختلف من اجل سهوله التنقل بين الدروس
+# دورة Three.js
+
+## تشغيل المشروع
+
+```bash
+npm install
+npm run dev
+```
+
+ثم افتح **http://localhost:5173/** في المتصفح.
+
+## التنقل بين الدروس
+
+الصفحة الرئيسية تعرض قائمة الدروس. اضغط على الدرس لفتحه، أو ادخل مباشرة إلى عنوان مثل **http://localhost:5173/lessons/2-basics/** (غيّر الجزء الأخير حسب الدرس).
+
