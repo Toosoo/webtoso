@@ -47,5 +47,12 @@ export const lessons = [
     url: '/lessons/9-debug/',
     youtubeUrl: 'https://www.youtube.com/watch?v=lS3SnFx0jpY&list=PLVFwdndx21r7HzdqCq6pZbuJXtsyyjSc4&index=9',
     tags: ['three.js', 'lil-gui', 'stats.js'],
-  }
+  },
+  {
+    slug: '10-textures',
+    title: 'Textures',
+    url: '/lessons/10-textures/',
+    youtubeUrl: null,
+    tags: ['three.js'],
+  },
 ]
