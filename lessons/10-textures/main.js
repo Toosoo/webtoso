@@ -2,7 +2,6 @@ import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import "../../src/global-style.css";
 
-
 const canvasElement = document.getElementById("canvas");
 const scene = new THREE.Scene();
 
@@ -31,22 +30,77 @@ function resizeRendererToDisplaySize(renderer, maxPixelCount = 3480 * 2160) {
 }
 
 // ---------------- lights ---------------- //
-const ambient = new THREE.AmbientLight(0xffffff, 1);
+const ambient = new THREE.AmbientLight(0xffffff, 3);
 scene.add(ambient);
 
-const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+const directionalLight = new THREE.DirectionalLight(0xffffff, 3);
 directionalLight.position.set(1, 1, 2);
 scene.add(directionalLight);
 
+// ---------------- textures ---------------- //
+
+const loader = new THREE.TextureLoader();
+
+const baseColor = loader.load("/textures/fabric/basecolor.png");
+baseColor.colorSpace = THREE.SRGBColorSpace;
+
+// baseColor.offset.y = - .2
+
+const ao = loader.load("/textures/fabric/ambientOcclusion.png");
+const height = loader.load("/textures/fabric/height.png");
+
+const metallic = loader.load("/textures/fabric/metallic.png");
+const normal = loader.load("/textures/fabric/normal.png");
+const opacity = loader.load("/textures/fabric/opacity.png");
+const roughness = loader.load("/textures/fabric/roughness.png");
+const anisotropy = loader.load("/textures/fabric/anisotropy.png");
+
+const allTextures = [
+	baseColor,
+	ao,
+	metallic,
+	height,
+	normal,
+	opacity,
+	roughness,
+	anisotropy,
+];
+
+allTextures.forEach((texture) => {
+	texture.wrapS = THREE.RepeatWrapping;
+	texture.wrapT = THREE.RepeatWrapping;
+	texture.repeat.set(6, 6);
+});
+
 // ---------------- material   ---------------- //
 const material = new THREE.MeshPhysicalMaterial({
-	color: "red",
+	map: baseColor,
+	// color:"yellow",
+	normalMap: normal,
+	// normalScale:new THREE.Vector2(10,10),
+	roughnessMap: roughness,
+	// roughness:1,
+	metalnessMap: metallic,
+	// metalness:1,
+	aoMap: ao,
+	// aoMapIntensity:2,
+	displacementMap: height,
+	displacementScale: 0.08,
+	alphaMap: opacity,
+	// transparent:true,
+	anisotropyMap: anisotropy,
+	// opacity:.5,
+	// side:THREE.DoubleSide
+	// wireframe:true
 });
 
 // ---------------- meshes ---------------- //
-const cube = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), material);
+const cube = new THREE.Mesh(
+	new THREE.BoxGeometry(1, 1, 1, 50, 50, 50),
+	material,
+);
 
-const sphere = new THREE.Mesh(new THREE.SphereGeometry(1, 32, 32), material);
+const sphere = new THREE.Mesh(new THREE.SphereGeometry(1, 320, 320), material);
 
 const plane = new THREE.Mesh(new THREE.PlaneGeometry(1, 2), material);
 
