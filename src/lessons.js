@@ -52,7 +52,7 @@ export const lessons = [
     slug: '10-textures',
     title: 'Textures',
     url: '/lessons/10-textures/',
-    youtubeUrl: null,
+    youtubeUrl: 'https://www.youtube.com/watch?v=72YQr1K2tdo&list=PLVFwdndx21r7HzdqCq6pZbuJXtsyyjSc4&index=10',
     tags: ['three.js'],
   },
 ]
