@@ -55,4 +55,11 @@ export const lessons = [
     youtubeUrl: 'https://www.youtube.com/watch?v=72YQr1K2tdo&list=PLVFwdndx21r7HzdqCq6pZbuJXtsyyjSc4&index=10',
     tags: ['three.js'],
   },
+  {
+    slug: '11-loading-manager',
+    title: 'Loading Manager',
+    url: '/lessons/11-loading-manager/',
+    youtubeUrl: 'https://www.youtube.com/watch?v=PRioWnAUZeg&list=PLVFwdndx21r7HzdqCq6pZbuJXtsyyjSc4&index=12',
+    tags: ['three.js'],
+  },
 ]
