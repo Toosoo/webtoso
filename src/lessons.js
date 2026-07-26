@@ -66,7 +66,7 @@ export const lessons = [
     slug: '12-lights',
     title: 'Lights',
     url: '/lessons/12-lights/',
-    youtubeUrl: 'https://www.youtube.com/watch?v=PRioWnAUZeg&list=PLVFwdndx21r7HzdqCq6pZbuJXtsyyjSc4&index=12',
+    youtubeUrl: 'https://www.youtube.com/watch?v=PRioWnAUZeg&list=PLVFwdndx21r7HzdqCq6pZbuJXtsyyjSc4&index=13',
     tags: ['three.js'],
   }
 ]
