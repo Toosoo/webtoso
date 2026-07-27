@@ -1,0 +1,33 @@
+/* Hub page only. The lesson pages keep using ../global-style.css. */
+@import "tailwindcss";
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/space-grotesk";
+
+@theme {
+	/* Sampled from the reference design. */
+	--color-canvas: #eae8e9; /* page background        */
+	--color-surface: #efeeef; /* cards, bars, top bar   */
+	--color-blush: #f4e4e1; /* every 3rd card         */
+	--color-ink: #201e1c; /* text, rules            */
+	--color-muted: #686564; /* labels: AA on all three surfaces */
+	--color-accent: #ec3113; /* red                    */
+	--color-hairline: rgb(0 0 0 / 0.12); /* self-tints per surface */
+	--color-dot: #afadae; /* background grid        */
+
+	--font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+	--font-display: "Space Grotesk Variable", "Inter Variable", sans-serif;
+}
+
+@layer base {
+	body {
+		background-color: var(--color-canvas);
+		background-image: radial-gradient(
+			circle at 1px 1px,
+			var(--color-dot) 1px,
+			transparent 0
+		);
+		background-size: 24px 24px;
+		color: var(--color-ink);
+		-webkit-font-smoothing: antialiased;
+	}
+}
