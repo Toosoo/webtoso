@@ -92,9 +92,8 @@ export const lessons = [
 		slug: "12-lights",
 		title: "Lights",
 		url: "/lessons/12-lights/",
-		// TODO: this is Loading Manager's video id — replace with the Lights video.
 		youtubeUrl:
-			"https://www.youtube.com/watch?v=PRioWnAUZeg&list=PLVFwdndx21r7HzdqCq6pZbuJXtsyyjSc4&index=13",
+			"https://www.youtube.com/watch?v=O5_xHGmtCrE&list=PLVFwdndx21r7HzdqCq6pZbuJXtsyyjSc4&index=12",
 		tags: ["three.js"],
 		category: "textures-light",
 	},
