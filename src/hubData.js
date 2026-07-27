@@ -21,7 +21,7 @@ export const hub = {
 	/** Order here is the order of the filter chips and the sections. */
 	categories: [
 		{ id: "foundations", label: "Foundations" },
-		{ id: "textures-light", label: "Textures & Light" },
+		{ id: "textures-light", label: "Textures & Lights" },
 	],
 	lessonCard: {
 		/** `{title}` is replaced with the lesson title. */

@@ -59,7 +59,7 @@ export const lessons = [
 		youtubeUrl:
 			"https://www.youtube.com/watch?v=raXF6Ipt00c&list=PLVFwdndx21r7HzdqCq6pZbuJXtsyyjSc4&index=8",
 		tags: ["three.js"],
-		category: "foundations",
+		category: "textures-light",
 	},
 	{
 		slug: "9-debug",
@@ -68,7 +68,7 @@ export const lessons = [
 		youtubeUrl:
 			"https://www.youtube.com/watch?v=lS3SnFx0jpY&list=PLVFwdndx21r7HzdqCq6pZbuJXtsyyjSc4&index=9",
 		tags: ["three.js", "lil-gui", "stats.js"],
-		category: "foundations",
+		category: "textures-light",
 	},
 	{
 		slug: "10-textures",
