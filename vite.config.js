@@ -2,6 +2,7 @@ import { resolve } from "node:path";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
+import { seo } from "./plugins/seo.js";
 import { lessons } from "./src/lessons.js";
 
 const lessonInputs = Object.fromEntries(
@@ -12,7 +13,7 @@ const lessonInputs = Object.fromEntries(
 );
 
 export default defineConfig({
-	plugins: [react(), tailwindcss()],
+	plugins: [react(), tailwindcss(), seo()],
 	server: {
 		port: 3000,
 		host: true,
