@@ -1,0 +1,15 @@
+@import "@fontsource-variable/bricolage-grotesque";
+
+body {
+  font-family: "Bricolage Grotesque", sans-serif;
+  
+}
+
+
+h1 {
+  color:#e2e2e2
+}
+
+.box {
+  border:1px dashed #ddd
+}

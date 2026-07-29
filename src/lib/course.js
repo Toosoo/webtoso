@@ -8,16 +8,19 @@ function rangeOf(items) {
 }
 
 /**
- * Derives everything the hub renders from the raw lesson list: display numbers,
- * category sections, per-category counts and number ranges.
+ * Derives everything the hub renders from one section's raw item list: display
+ * numbers, URLs, category groups, per-group counts and number ranges.
  *
- * Nothing here is hand-maintained — adding a lesson to `lessons.js` updates the
- * numbering, the counts, the "ALL n" pill and the eyebrow on its own.
+ * Nothing here is hand-maintained — adding an item to a content file updates the
+ * numbering, the counts, the "ALL n" pill and the eyebrow on its own. Numbering
+ * is per-section, so every course starts at 01.
  */
-export function buildCourse(lessons, categories) {
+export function buildCourse(lessons, categories, sectionId) {
 	const numbered = lessons.map((lesson, index) => ({
 		...lesson,
 		number: index + 1,
+		section: sectionId,
+		url: `/${sectionId}/${lesson.slug}/`,
 	}));
 
 	const sections = categories
@@ -39,7 +42,7 @@ export function buildCourse(lessons, categories) {
 		for (const lesson of numbered) {
 			if (!known.has(lesson.category)) {
 				console.warn(
-					`[hub] lesson "${lesson.slug}" has category "${lesson.category}", which is not in hub.categories — it will not be rendered.`,
+					`[hub] "${sectionId}/${lesson.slug}" has category "${lesson.category}", which is not in i18n.sections.${sectionId}.categories — it will not be rendered.`,
 				);
 			}
 		}

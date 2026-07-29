@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/src/global-style.css">
+    <title>scrollSmoother</title>
+    <style>
+        
+        body {
+            font-family: "Roboto Condensed", sans-serif;
+        }
+
+        .boldonse-regular {
+            font-family: "Anton", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        #smooth-content {
+            width: 100%;
+            min-height: 300vh;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, .07) 2px, transparent 2px),
+                linear-gradient(90deg, rgba(255, 255, 255, .07) 2px, transparent 2px),
+                linear-gradient(rgba(255, 255, 255, .06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, .06) 1px, transparent 1px);
+            background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+            background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
+        }
+
+        .box {
+            width: 100px;
+            aspect-ratio: 1/1;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+
+<body class="h-screen text-2xl bg-black">
+    <div id="smooth-content">
+
+        <div class="h-screen">
+        </div>
+
+        <div id="container" class="border border-white py-50">
+            <div id="white" class="size-20 bg-white"></div>
+            <div id="blue" class="size-20 bg-blue-600"></div>
+        </div>
+        
+    </div>
+    <script type="module" src="./main.js"></script>
+</body>
+
+</html>

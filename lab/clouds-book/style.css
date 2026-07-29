@@ -1,0 +1,24 @@
+/*
+ * Moved out of an inline <style> in index.html so Vite can see the @font-face.
+ *
+ * A `url()` inside inline HTML CSS is resolved by neither Vite's HTML asset
+ * handling nor `absolutise()` in vite.config.js — both only rewrite `src`/`href`
+ * attributes — so `./Adieu-Regular.ttf` 404'd on the generated page while the
+ * build stayed green. In a real .css file the path resolves against this file
+ * and the font is emitted as a hashed asset like any other.
+ */
+@font-face {
+	font-family: "Adieu-Regular";
+	src: url(/assets/clouds-book/Adieu-Regular.ttf);
+}
+
+body {
+	font-family: "Poppins", sans-serif;
+	font-weight: 500;
+}
+
+h1,
+h2,
+h3 {
+	font-family: "Adieu-Regular";
+}

@@ -2,6 +2,8 @@
 @import "tailwindcss";
 @import "@fontsource-variable/inter";
 @import "@fontsource-variable/space-grotesk";
+/* Arabic. Inter and Space Grotesk have no Arabic glyphs. */
+@import "@fontsource-variable/cairo";
 
 @theme {
 	/* Sampled from the reference design. */
@@ -14,8 +16,19 @@
 	--color-hairline: rgb(0 0 0 / 0.12); /* self-tints per surface */
 	--color-dot: #afadae; /* background grid        */
 
-	--font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
-	--font-display: "Space Grotesk Variable", "Inter Variable", sans-serif;
+	/*
+	 * Latin face first, Arabic second. A browser uses the first font in the
+	 * stack that actually has the glyph, so Latin text renders in Inter and
+	 * Arabic falls through to Cairo — which is what makes a mixed title like
+	 * "كورس three.js" render correctly in one run of text.
+	 *
+	 * Fontsource ships unicode-range per subset, so an English page never
+	 * downloads the Arabic files.
+	 */
+	--font-sans:
+		"Inter Variable", "Cairo Variable", ui-sans-serif, system-ui, sans-serif;
+	--font-display:
+		"Space Grotesk Variable", "Inter Variable", "Cairo Variable", sans-serif;
 }
 
 @layer base {

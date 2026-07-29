@@ -1,0 +1,19 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    { "source": "/lessons/2-basics/:path*", "destination": "/en/threejs/basics/:path*", "permanent": true },
+    { "source": "/lessons/3-basics2/:path*", "destination": "/en/threejs/basics-2/:path*", "permanent": true },
+    { "source": "/lessons/4-responsive-design/:path*", "destination": "/en/threejs/responsive-design/:path*", "permanent": true },
+    { "source": "/lessons/6-buffer-geometry/:path*", "destination": "/en/threejs/buffer-geometry/:path*", "permanent": true },
+    { "source": "/lessons/7-cameras-controls/:path*", "destination": "/en/threejs/cameras-controls/:path*", "permanent": true },
+    { "source": "/lessons/8-materials/:path*", "destination": "/en/threejs/materials/:path*", "permanent": true },
+    { "source": "/lessons/9-debug/:path*", "destination": "/en/threejs/debug/:path*", "permanent": true },
+    { "source": "/lessons/10-textures/:path*", "destination": "/en/threejs/textures/:path*", "permanent": true },
+    { "source": "/lessons/11-loading-manager/:path*", "destination": "/en/threejs/loading-manager/:path*", "permanent": true },
+    { "source": "/lessons/12-lights/:path*", "destination": "/en/threejs/lights/:path*", "permanent": true },
+
+    { "source": "/lessons/:path*", "destination": "/en/threejs/:path*", "permanent": true },
+
+    { "source": "/", "destination": "/ar/", "permanent": false }
+  ]
+}

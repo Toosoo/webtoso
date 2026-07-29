@@ -1,0 +1,9 @@
+* {
+    fill:none;
+    stroke:yellow;
+    stroke-width:5
+}
+
+#shape2 {
+    opacity:.5
+}

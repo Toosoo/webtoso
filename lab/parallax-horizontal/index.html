@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/src/global-style.css">
+    <title>parallax horizontal scroll</title>
+    <style>
+        img {
+            position: absolute;
+            width: 120%;
+            height: 100%;
+            max-width: none;
+        }
+
+        .slide {
+            position: relative;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body class="h-screen text-2xl bg-black">
+    <div id="smooth-content">
+        <div class="h-screen grid place-content-center text-white text-9xl"> Scroll </div>
+        <section class="relative w-full overflow-hidden">
+            <div id="horizontalSection" class="relative w-full min-w-fit flex nowrap">
+                <div class="slide">
+                    <img src="/assets/parallax-horizontal/clay-1.webp" alt="">
+                </div>
+                <div class="slide">
+                    <img src="/assets/parallax-horizontal/clay-2.webp" alt="">
+                </div>
+                <div class="slide">
+                    <img src="/assets/parallax-horizontal/clay-3.webp" alt="">
+                </div>
+                <div class="slide">
+                    <img src="/assets/parallax-horizontal/clay-4.webp" alt="">
+                </div>
+                <div class="slide">
+                    <img src="/assets/parallax-horizontal/clay-5.webp" alt="">
+                </div>
+                <div class="slide">
+                    <img src="/assets/parallax-horizontal/clay-6.webp" alt="">
+                </div>
+                <div class="slide">
+                    <img src="/assets/parallax-horizontal/clay-7.webp" alt="">
+                </div>
+            </div>
+        </section>
+    </div>
+    <script type="module" src="./main.js"></script>
+</body>
+
+</html>

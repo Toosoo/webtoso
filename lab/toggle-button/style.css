@@ -1,0 +1,7 @@
+body {
+  background-image: linear-gradient(to top, #ddd 0%, #ffd1ff 100%);
+}
+
+svg {
+  overflow: visible;
+}

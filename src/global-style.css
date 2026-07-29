@@ -1,20 +1,68 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap");
+/*
+ * Every `@import` has to come first — CSS requires them to precede all other
+ * at-rules and style rules, `@source` included.
+ *
+ * Self-hosted, matching the hub. Inter used to come from the Google Fonts CDN
+ * here while the hub used the same font from npm — one render-blocking request
+ * to a third party for a font already on disk.
+ *
+ * Cairo carries the Arabic in the lesson chrome bar. Fontsource ships
+ * unicode-range per subset, so an English lesson never downloads it. Both stay
+ * top-level rather than scoped: the chrome bar renders on every lesson page,
+ * declares these two faces itself, and needs the files present regardless of
+ * what the lesson body looks like.
+ */
 @import "tailwindcss";
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/cairo";
+
+/*
+ * Tailwind v4 auto-detects sources relative to THIS file's directory, which is
+ * `src/`. Without these, the only utilities in the built CSS are the ones the
+ * hub happens to use — `bg-black/80` and the rest of the lesson markup produce
+ * nothing, and every lesson that drops the browser CDN renders unstyled.
+ *
+ * This has to stay ahead of the CDN removal, not alongside it.
+ */
+@source "../threejs";
+@source "../gsap";
+@source "../lab";
 
 html,
 body {
-  margin: 0;
-  min-height: 100vh;
-  height: 100vh;
-  overflow: hidden;
-  background: rgb(39, 39, 39);
-  font-family: "Inter", sans-serif;
-  color: whitesmoke;
+	margin: 0;
+	min-height: 100vh;
+}
+
+/*
+ * The canvas-lesson stage: a full-viewport dark surface that must not scroll.
+ *
+ * Opt-in, per decision 20. This used to be the unconditional base, which was
+ * correct while only the ten three.js lessons loaded this file — but the GSAP
+ * and lab lessons never had it (they used the Tailwind browser CDN), and 12 of
+ * them are scroll-driven. Making the whole treatment a class means the default
+ * is the safe one: a scrollable canvas page is barely noticeable, a
+ * non-scrolling ScrollTrigger page is broken.
+ *
+ * It carries the background, colour and font as well as the lock, so that
+ * adding this file to a GSAP lesson changes nothing about how it looks.
+ */
+html:has(body.lesson-canvas) {
+	height: 100vh;
+	overflow: hidden;
+}
+
+body.lesson-canvas {
+	height: 100vh;
+	overflow: hidden;
+	background: rgb(39, 39, 39);
+	font-family: "Inter Variable", "Cairo Variable", sans-serif;
+	color: whitesmoke;
 }
 
 .absolute-center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }

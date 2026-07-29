@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/src/global-style.css">
+    <title>Tween</title>
+    <style>
+        
+        .boldonse-regular {
+            font-family: "Boldonse", system-ui;
+            font-weight: 400;
+            font-style: normal;
+        }
+    </style>
+</head>
+
+<body class="boldonse-regular items-center justify-center h-screen flex flex-col gap-10 p-20 bg-gradient-to-t from-orange-400 to-white  text-white">
+    <div class="flex gap-3 [&_img]:size-20">
+        <img src="/assets/stagger/S (black).webp" alt="" srcset="">
+        <img src="/assets/stagger/T (black).webp" alt="" srcset="">
+        <img src="/assets/stagger/A (black).webp" alt="" srcset="">
+        <img src="/assets/stagger/G (black).webp" alt="" srcset="">
+        <img src="/assets/stagger/G (black).webp" alt="" srcset="">
+        <img src="/assets/stagger/E (black).webp" alt="" srcset="">
+        <img src="/assets/stagger/R (black).webp" alt="" srcset="">
+        <img src="/assets/stagger/S (black).webp" alt="" srcset="">
+    </div>
+    <script type="module">
+import "@fontsource/boldonse";
+import { gsap } from "gsap";
+
+        document.addEventListener("DOMContentLoaded", (event) => {
+
+
+
+            gsap.from('img', {
+                opacity: 0,
+                y: 50,
+                duration:1,
+                stagger:{
+                    yoyo:true,
+                    repeat:-1,
+                    each:.1, 
+                }
+            })
+
+
+
+
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+@import "@fontsource-variable/bricolage-grotesque";
+@import "tailwindcss";
+
+/*
+ * The "quning" @font-face was dropped here. Its woff2 was never in this repo,
+ * so the face never loaded and the body has always rendered in the sans-serif
+ * fallback below. Removing it changes nothing on screen and clears a 404 on
+ * every visit to this lesson. The filename is left out on purpose — a dead
+ * reference sweep greps for the path, and a comment quoting it reads as a hit.
+ */
+body {
+  font-family: sans-serif;
+  background-color: #e6e2d6;
+  color: black;
+}
+
+p {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-optical-sizing: auto;
+}
