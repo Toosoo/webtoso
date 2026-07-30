@@ -10,14 +10,11 @@ import { Label } from "./Label.jsx";
  * string per locale — it is already the one-sentence summary of the course, and
  * having the card and the search result say the same thing is a feature.
  */
-export function CourseCard({ section, count, index }) {
-	const blush = index % 3 === 2;
-
+export function CourseCard({ section, count }) {
 	return (
 		<article
 			className={cn(
-				"group relative flex h-full flex-col transition duration-150",
-				blush ? "bg-blush" : "bg-surface",
+				"group relative flex h-full flex-col bg-surface transition duration-150",
 				"border border-hairline hover:-translate-y-0.5 hover:border-ink hover:shadow-[0_6px_16px_rgb(0_0_0/0.07)]",
 			)}
 		>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 — webtoso</title>
+  <meta name="robots" content="noindex" />
+  <!--
+    Self-contained on purpose, the same way the lesson chrome bar is.
+
+    This file lives in `public/`, which Vite copies verbatim and does NOT
+    content-hash (decision 18). The hub's Tailwind bundle IS hashed, so its
+    filename changes on every build — a <link> to it here would 404 the moment
+    anything upstream changed, which is the exact failure this page exists to
+    catch. Inlined CSS and a system font stack cannot break that way.
+
+    Bilingual because one file answers every bad URL and the locale is unknown
+    at that point: /ar/typo and /en/typo both land here. Arabic leads, matching
+    decision 25's root redirect.
+  -->
+  <style>
+    :root {
+      --canvas: #eae8e9;
+      --surface: #efeeef;
+      --ink: #201e1c;
+      --muted: #686564;
+      --accent: #ec3113;
+      --hairline: rgb(0 0 0 / 0.12);
+      --dot: #afadae;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100vh;
+    }
+
+    body {
+      background-color: var(--canvas);
+      background-image: radial-gradient(circle at 1px 1px, var(--dot) 1px, transparent 0);
+      background-size: 24px 24px;
+      color: var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.25rem;
+      gap: 2.5rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .brand-mark {
+      width: 0.875rem;
+      height: 0.875rem;
+      background: var(--accent);
+      flex: none;
+    }
+
+    .brand-name {
+      font-size: 0.8125rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .code {
+      font-size: clamp(4.5rem, 18vw, 8rem);
+      line-height: 1;
+      font-weight: 700;
+      color: var(--accent);
+      margin: 0;
+      letter-spacing: -0.02em;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      width: 100%;
+      max-width: 46rem;
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+    .locale {
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .locale + .locale {
+      border-top: 1px solid var(--hairline);
+    }
+
+    @media (min-width: 40rem) {
+      .panel {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .locale + .locale {
+        border-top: 0;
+        border-inline-start: 1px solid var(--hairline);
+      }
+    }
+
+    .label {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .message {
+      margin: 0;
+      font-size: 1.0625rem;
+      line-height: 1.6;
+    }
+
+    .links {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .links a {
+      display: inline-block;
+      padding: 0.4375rem 0.8125rem;
+      border: 1px solid var(--hairline);
+      background: var(--canvas);
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 0.875rem;
+      line-height: 1.2;
+      transition: background-color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .links a:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .links a:focus-visible {
+      outline: 2px solid var(--ink);
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+
+<body>
+  <a class="brand" href="/" aria-label="webtoso">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-name">webtoso</span>
+  </a>
+
+  <!-- A lone numeral is bidi-neutral, but this document is RTL and this repo
+       has shipped a reversed range before. Pinning it costs nothing. -->
+  <p class="code" dir="ltr">404</p>
+
+  <div class="panel">
+    <section class="locale" lang="ar" dir="rtl">
+      <p class="label">عذرًا</p>
+      <p class="message">الصفحة دي مش موجودة. يمكن الرابط اتغيّر، أو فيه غلطة في العنوان.</p>
+      <ul class="links">
+        <li><a href="/ar/">الرئيسية</a></li>
+        <li><a href="/ar/threejs/">three.js</a></li>
+        <li><a href="/ar/gsap/">GSAP</a></li>
+        <li><a href="/ar/lab/">أمثلة</a></li>
+      </ul>
+    </section>
+
+    <section class="locale" lang="en" dir="ltr">
+      <p class="label">Not found</p>
+      <p class="message">This page doesn't exist. The link may have changed, or the address has a typo.</p>
+      <ul class="links">
+        <li><a href="/en/">Home</a></li>
+        <li><a href="/en/threejs/">three.js</a></li>
+        <li><a href="/en/gsap/">GSAP</a></li>
+        <li><a href="/en/lab/">Lab</a></li>
+      </ul>
+    </section>
+  </div>
+</body>
+
+</html>

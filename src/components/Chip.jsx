@@ -6,7 +6,13 @@ const chip = cva(
 	{
 		variants: {
 			active: {
-				true: "border-accent bg-accent text-white",
+				/*
+				 * Near-black on the accent, not white: this is 0.6875rem uppercase
+				 * text, and white on the dark theme's lifted accent measures
+				 * 3.19:1 — under AA for small text. `canvas` gives 6.06:1, and it
+				 * matches the section header, which is the same dark-on-bright move.
+				 */
+				true: "border-accent bg-accent text-canvas",
 				false: "border-hairline bg-surface text-ink hover:border-ink",
 			},
 		},

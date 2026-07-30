@@ -8,9 +8,9 @@
  * single scratch file titled "Lesson 5", the other has an empty `<title>` and
  * is a throwaway timeline experiment. Neither belongs in a showcase.
  *
- * Videos come from the "تطبيقات الدروس" playlist, extracted 2026-07-28. Four of
- * its eleven videos have no demo here yet: #001 Stagger Text, #008 Video Scrub,
- * #010 Stack Cards, #011 Abstract Hero.
+ * Videos come from the "تطبيقات الدروس" playlist, extracted 2026-07-28 and
+ * re-extracted 2026-07-30. Three of its eleven videos have no demo here yet:
+ * #001 Stagger Text, #008 Video Scrub, #010 Stack Cards.
  *
  * `creative-dev` and `lottie-scrolltrigger` carry no `youtubeUrl` — they are not
  * obviously in this playlist, and they are the first two items on the site
@@ -83,6 +83,18 @@ export const lab = [
 		tags: ["gsap", "ScrollTrigger"],
 		category: "sites",
 		youtubeUrl: watch("Sy11oO9p1Jo", 2),
+	},
+	/**
+	 * The only piece on the site that uses three.js and GSAP together, which is
+	 * why it lives in the lab rather than in either course. Its matcap comes from
+	 * the shared `public/matcaps/` set — matcap-6, one of the 5–18 kept on purpose.
+	 */
+	{
+		slug: "abstract-hero",
+		title: "Abstract hero",
+		tags: ["gsap", "ScrollTrigger", "three.js", "lil-gui"],
+		category: "sites",
+		youtubeUrl: watch("ipYpvV0IuK4", 11),
 	},
 	/*
 	 * Held back — the demo is not finished. Everything but the bird is commented

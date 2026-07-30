@@ -18,24 +18,16 @@ export function Landing() {
 			<TopBar />
 			<main>
 				<Container className="pb-20">
-					<Hero
-						eyebrow={hub.home.eyebrow}
-						heading={hub.home.heading}
-						lines={hub.home.subtitle}
-					/>
+					<Hero heading={hub.home.heading} lines={hub.home.subtitle} />
 
 					<section aria-labelledby="courses-heading" className="mt-12 sm:mt-16">
 						<Label as="h2" id="courses-heading">
 							{hub.home.coursesHeading}
 						</Label>
 						<ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-							{hub.sections.map((section, index) => (
+							{hub.sections.map((section) => (
 								<li key={section.id}>
-									<CourseCard
-										section={section}
-										count={section.items.length}
-										index={index}
-									/>
+									<CourseCard section={section} count={section.items.length} />
 								</li>
 							))}
 						</ul>

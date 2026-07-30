@@ -1,19 +1,13 @@
 /** Two-digit display number: 1 -> "01". */
 export const pad = (n) => String(n).padStart(2, "0");
 
-function rangeOf(items) {
-	const first = pad(items[0].number);
-	const last = pad(items[items.length - 1].number);
-	return first === last ? first : `${first}–${last}`;
-}
-
 /**
  * Derives everything the hub renders from one section's raw item list: display
- * numbers, URLs, category groups, per-group counts and number ranges.
+ * numbers, URLs, category groups and per-group counts.
  *
  * Nothing here is hand-maintained — adding an item to a content file updates the
- * numbering, the counts, the "ALL n" pill and the eyebrow on its own. Numbering
- * is per-section, so every course starts at 01.
+ * numbering and the "ALL n" pill on its own. Numbering is per-section, so every
+ * course starts at 01.
  */
 export function buildCourse(lessons, categories, sectionId) {
 	const numbered = lessons.map((lesson, index) => ({
@@ -32,7 +26,6 @@ export function buildCourse(lessons, categories, sectionId) {
 				label,
 				lessons: items,
 				count: items.length,
-				range: rangeOf(items),
 			};
 		})
 		.filter(Boolean);

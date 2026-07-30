@@ -32,7 +32,7 @@ export const t = {
 		 * the brand on its own in `og:site_name`.
 		 */
 		siteName: "webtoso",
-		brand: "أحمد عطية",
+		brand: "webtoso",
 
 		/**
 		 * The language's own name, shown on the switcher in the *other* locale's
@@ -47,7 +47,6 @@ export const t = {
 			title: "كورسات تفاعلية بالعربي — three.js و GSAP | webtoso",
 			description:
 				"كورسات تفاعلية مجانية بالعربية في three.js و GSAP. كل درس صفحة شغالة تفتحها في متصفحك، ومعها شرح بالفيديو.",
-			eyebrow: "الكورسات",
 			heading: "كورسات تفاعلية بالعربي",
 			subtitle: [
 				"three.js و GSAP بالعربي، من أول خطوة لحد مشهد كامل منشور.",
@@ -214,7 +213,7 @@ export const t = {
 		ogLocale: "en_US",
 
 		siteName: "webtoso",
-		brand: "Ahmed Attia",
+		brand: "webtoso",
 
 		localeName: "English",
 		switchLocaleAriaLabel: "Switch to Arabic",
@@ -223,7 +222,6 @@ export const t = {
 			title: "Interactive three.js & GSAP courses in Arabic | webtoso",
 			description:
 				"Free interactive courses in three.js and GSAP. Every lesson runs live in your browser and has a video walkthrough.",
-			eyebrow: "Courses",
 			heading: "Interactive courses in Arabic",
 			subtitle: [
 				"three.js and GSAP, from the first step to a deployed scene.",

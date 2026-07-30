@@ -16,7 +16,6 @@ import { Tag } from "./Tag.jsx";
  * nothing else has to change.
  */
 export function LessonCard({ lesson, media }) {
-	const blush = lesson.number % 3 === 0;
 	const watchLabel = fill(hub.lessonCard.watchLabel, { title: lesson.title });
 	/** Keep the reader in the locale they are browsing. */
 	const href = `/${hub.locale}${lesson.url}`;
@@ -26,8 +25,7 @@ export function LessonCard({ lesson, media }) {
 	return (
 		<article
 			className={cn(
-				"group relative h-full transition duration-150",
-				blush ? "bg-blush" : "bg-surface",
+				"group relative h-full bg-surface transition duration-150",
 				"sm:border sm:border-hairline sm:hover:-translate-y-0.5 sm:hover:border-ink sm:hover:shadow-[0_6px_16px_rgb(0_0_0/0.07)]",
 			)}
 		>

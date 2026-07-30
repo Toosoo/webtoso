@@ -45,13 +45,7 @@ export function CourseIndex({ section }) {
 						{hub.backHome}
 					</a>
 
-					<Hero
-						eyebrow={section.label}
-						heading={section.index.heading}
-						lines={section.index.intro}
-						count={course.total}
-						noun={itemNoun(hub.locale, course.total, section.id)}
-					/>
+					<Hero heading={section.index.heading} lines={section.index.intro} />
 
 					<CourseProse copy={section.index} />
 
@@ -82,10 +76,7 @@ export function CourseIndex({ section }) {
 						>
 							<SectionHeader
 								headingId={`${group.id}-heading`}
-								range={group.range}
 								label={group.label}
-								count={group.count}
-								sectionId={section.id}
 							/>
 							<LessonGrid lessons={group.lessons} />
 						</section>

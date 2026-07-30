@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0" />
+  <title>abstract hero</title>
+  <link rel="stylesheet" href="/src/global-style.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="bg-black">
+  <!-- hero -->
+  <div class="h-screen relative text-white flex-center z-1">
+    <div
+         class="size-full relative z-1 pointer-events-none  flex-center text-center">
+      <div class="max-w-2xl space-y-4 px-10 pt-20">
+        <h1 class="text-8xl capitalize">
+          <strong class="font-bold">creative</strong> technology
+        </h1>
+        <p>We transform complex business challenges into seamless
+          software solutions through cutting-edge technology and
+          creative design.</p>
+      </div>
+    </div>
+    <div
+         class="blur-element h-7/10 w-full max-w-3xl bg-black/50 border border-white/20 border-b-0 absolute -z-1 bottom-0 rounded-t-full backdrop-blur-md">
+    </div>
+
+
+
+    <canvas id="canvas"
+            class="size-full absolute inset-0 -z-2"></canvas>
+  </div>
+  <!-- spacer -->
+  <div class="h-screen">
+  </div>
+  <script type="module" src="./main.js"></script>
+</body>
+
+</html>
