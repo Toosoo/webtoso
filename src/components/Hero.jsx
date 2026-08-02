@@ -1,12 +1,5 @@
 import { Rule } from "./Rule.jsx";
 
-/**
- * Shared masthead for the landing page and the three course indexes.
- *
- * Everything arrives as a prop rather than being read from `hub` directly,
- * because the two page shapes pull from different copy blocks — `home` and
- * `sections[id].index`.
- */
 export function Hero({ heading, lines }) {
 	return (
 		<div className="pt-10 sm:pt-14">

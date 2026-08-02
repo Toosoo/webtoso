@@ -1,12 +1,5 @@
 import { Label } from "./Label.jsx";
 
-/**
- * The indexable body of a course index page.
- *
- * Decision 13 puts all the site's prose in the hubs, because lesson pages carry
- * no text at all — so this block, on four pages per locale, is the whole SEO
- * surface. Headings are MSA and the body is Egyptian, per decision 17.
- */
 export function CourseProse({ copy }) {
 	return (
 		<div className="mt-12 grid gap-10 border-t border-hairline pt-10 sm:mt-14 sm:grid-cols-2 sm:gap-12">

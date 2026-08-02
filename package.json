@@ -3,6 +3,7 @@
 	"private": true,
 	"version": "0.0.0",
 	"type": "module",
+	"packageManager": "pnpm@10.14.0",
 	"scripts": {
 		"dev": "vite",
 		"build": "vite build",
@@ -11,11 +12,11 @@
 		"format": "biome check --write ."
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.4.15",
-		"@types/react": "^19.2.14",
-		"@types/react-dom": "^19.2.3",
-		"@vitejs/plugin-react": "^6.0.1",
-		"vite": "^8.0.9"
+		"@biomejs/biome": "2.5.6",
+		"@types/react": "^19.2.18",
+		"@types/react-dom": "^19.2.4",
+		"@vitejs/plugin-react": "^6.0.5",
+		"vite": "^8.2.0"
 	},
 	"dependencies": {
 		"@fontsource-variable/bricolage-grotesque": "^5.3.0",
@@ -30,19 +31,19 @@
 		"@gsap/react": "^2.1.2",
 		"@lottiefiles/dotlottie-web": "^0.78.2",
 		"@react-three/drei": "^10.7.7",
-		"@react-three/fiber": "^9.6.1",
-		"@tailwindcss/vite": "^4.2.4",
+		"@react-three/fiber": "^9.7.0",
+		"@tailwindcss/vite": "^4.3.3",
 		"class-variance-authority": "^0.7.1",
 		"clsx": "^2.1.1",
-		"gsap": "^3.14.2",
+		"gsap": "^3.15.0",
 		"lil-gui": "^0.21.0",
 		"pixi.js": "^8.19.0",
-		"react": "^19.2.5",
-		"react-dom": "^19.2.5",
-		"react-icons": "^5.5.0",
+		"react": "^19.2.8",
+		"react-dom": "^19.2.8",
+		"react-icons": "^5.7.0",
 		"stats.js": "^0.17.0",
 		"tailwind-merge": "^3.6.0",
-		"tailwindcss": "^4.2.4",
-		"three": "^0.182.0"
+		"tailwindcss": "^4.3.3",
+		"three": "^0.185.1"
 	}
 }

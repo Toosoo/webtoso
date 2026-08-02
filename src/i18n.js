@@ -1,15 +1,6 @@
 /**
- * Every translated string on the site.
- *
- * Deliberately small. Lesson names, library names and code stay English in both
- * locales — that is how Arabic developers write, and real search queries mix the
- * two ("شرح three js بالعربي"). The Arabic keywords that get searched are the
- * framing words, not the technical nouns, so they live in the prose here rather
- * than in lesson titles.
- *
- * Register (decision 17): headings, page titles and meta descriptions are MSA,
- * because that is the form people type and the form Google's Arabic index is
- * strongest on. Body prose is Egyptian, matching the voice of the videos.
+ * Every translated string on the site. Lesson names, library names and code
+ * stay English in both locales.
  *
  * Imported by build code (vite.config.js, plugins/seo.js) and browser code
  * (lessonChrome.js, the hub components), so it must stay free of Node APIs.
@@ -26,19 +17,10 @@ export const t = {
 		htmlLang: "ar",
 		ogLocale: "ar_AR",
 
-		/**
-		 * Decision 21: keyword-first, brand last. `webtoso` has no search volume
-		 * yet, so it goes at the end of a title rather than the front — but it is
-		 * the brand on its own in `og:site_name`.
-		 */
 		siteName: "webtoso",
 		brand: "webtoso",
 
-		/**
-		 * The language's own name, shown on the switcher in the *other* locale's
-		 * navbar — a reader who lands on the English page and wants Arabic is
-		 * looking for "العربية", not for a translated word they can't read.
-		 */
+		/** Shown on the switcher in the *other* locale's navbar. */
 		localeName: "العربية",
 		switchLocaleAriaLabel: "التبديل إلى اللغة الإنجليزية",
 
@@ -64,13 +46,8 @@ export const t = {
 
 		/**
 		 * One entry per section id in `content/index.js`. Category key order is
-		 * the order of the filter chips and the sections on that hub.
-		 *
-		 * `index` is the section's own landing page — the page that ranks for
-		 * topic-level Arabic queries, and per decision 13 the site's real SEO
-		 * surface. `itemDescription` is the meta template for the section's
-		 * lesson pages (decision 22); it must name that section's own subject,
-		 * which is the bug it was added to fix.
+		 * the order of the filter chips. `itemDescription` is the meta template
+		 * for that section's lesson pages and must name its own subject.
 		 */
 		sections: {
 			threejs: {
@@ -184,23 +161,13 @@ export const t = {
 		/** `{title}` is replaced with the lesson title, which stays English. */
 		watchLabel: "شاهد {title} على يوتيوب",
 		socialNavAriaLabel: "روابط التواصل",
-		/**
-		 * Screen-reader-only live region on a course index. `{noun}` comes from
-		 * `itemNoun()` so the lab announces demos, not lessons.
-		 */
+		/** Screen-reader live region. `{noun}` comes from `itemNoun()`. */
 		showingCount: "عرض {shown} من {total} {noun}",
 
 		lessonNavAriaLabel: "التنقل بين الدروس",
 		homeAriaLabel: "العودة إلى فهرس الدروس",
 
-		/**
-		 * The chrome bar's previous/next arrows. `{title}` is the neighbouring
-		 * item's title, which stays English.
-		 *
-		 * Deliberately noun-free: the same bar renders over the courses and over
-		 * the lab, and "السابق" is right for a lesson and for a demo alike — so
-		 * this needs no per-section plural table the way a count does.
-		 */
+		/** Noun-free on purpose — the same bar renders over courses and the lab. */
 		prevAriaLabel: "السابق: {title}",
 		nextAriaLabel: "التالي: {title}",
 
@@ -351,14 +318,7 @@ export const t = {
 	},
 };
 
-/**
- * The noun "lesson", agreeing with a count.
- *
- * English has two forms; Arabic has six, and picking the wrong one reads as
- * broken to a native speaker — "5 درس" is wrong the way "5 lesson" is wrong.
- * `Intl.PluralRules` knows each locale's categories, so the table below just
- * supplies the words.
- */
+/** English has two plural forms, Arabic six — `Intl.PluralRules` picks. */
 const LESSON_NOUN = {
 	ar: {
 		zero: "دروس",
@@ -376,14 +336,7 @@ export const lessonNoun = (locale, count) => {
 	return LESSON_NOUN[locale][category] ?? LESSON_NOUN[locale].other;
 };
 
-/**
- * The counted noun for a section's items: "lesson" for the courses, "demo" for
- * the lab.
- *
- * A section overrides the whole plural table, not just the singular — "5 مثال"
- * is as wrong as "5 درس". Falls back to LESSON_NOUN when a section has no
- * override, which is the common case.
- */
+/** A section overrides the whole plural table, not just the singular. */
 export const itemNoun = (locale, count, sectionId) => {
 	const table = t[locale].sections[sectionId]?.itemNoun ?? LESSON_NOUN[locale];
 	const category = new Intl.PluralRules(locale).select(count);
@@ -397,37 +350,18 @@ export const fill = (template, values) =>
 		template,
 	);
 
-/**
- * Locale for a URL path. `/ar/lessons/lights/` → `"ar"`.
- * Falls back to DEFAULT_LOCALE so nothing renders blank if a path is unprefixed.
- */
+/** `/ar/lessons/lights/` → `"ar"`. Falls back to DEFAULT_LOCALE. */
 export const localeFromPath = (pathname) => {
 	const first = pathname.split("/").filter(Boolean)[0];
 	return LOCALES.includes(first) ? first : DEFAULT_LOCALE;
 };
 
-/**
- * Section and slug for a path, locale prefix or not.
- * `/ar/threejs/lights/` → `{ section: "threejs", slug: "lights" }`
- * `/ar/gsap/`           → `{ section: "gsap", slug: null }`
- * `/ar/`                → `{ section: null, slug: null }`
- *
- * The hub app routes on this: no section is the landing page, a section with no
- * slug is that course's index.
- */
-/** The other locale. Two locales, so this is just "the one that isn't this one". */
 export const otherLocale = (locale) =>
 	LOCALES.find((candidate) => candidate !== locale) ?? DEFAULT_LOCALE;
 
 /**
- * The same page in the other locale.
- *
- * `("/ar/gsap/", "en")` → `"/en/gsap/"`, `("/ar/", "en")` → `"/en/"`.
- *
- * Swapping the prefix and keeping the rest of the path is exactly right here
- * because slugs are ASCII and identical in both locales (decision 6) — so the
- * switcher always lands on the counterpart page rather than dumping the reader
- * back at the home page, which is the usual failure of a language switcher.
+ * `("/ar/gsap/", "en")` → `"/en/gsap/"`. Works because slugs are ASCII and
+ * identical in both locales, so the switcher lands on the counterpart page.
  */
 export function switchLocalePath(pathname, toLocale) {
 	const parts = pathname.split("/").filter(Boolean);
@@ -435,6 +369,7 @@ export function switchLocalePath(pathname, toLocale) {
 	return `/${toLocale}/${rest.length ? `${rest.join("/")}/` : ""}`;
 }
 
+/** `/ar/threejs/lights/` → `{ section: "threejs", slug: "lights" }`. */
 export function routeFromPath(pathname) {
 	const parts = pathname.split("/").filter(Boolean);
 	const rest = LOCALES.includes(parts[0]) ? parts.slice(1) : parts;

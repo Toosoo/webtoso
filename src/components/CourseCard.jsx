@@ -3,13 +3,6 @@ import { itemNoun } from "../i18n.js";
 import { cn } from "../lib/cn.js";
 import { Label } from "./Label.jsx";
 
-/**
- * One course on the root landing page.
- *
- * The blurb reuses the section's meta `description` rather than adding a fourth
- * string per locale — it is already the one-sentence summary of the course, and
- * having the card and the search result say the same thing is a feature.
- */
 export function CourseCard({ section, count }) {
 	return (
 		<article
@@ -38,7 +31,6 @@ export function CourseCard({ section, count }) {
 
 				<span className="mt-5 inline-flex items-center gap-2 text-[0.8125rem] font-medium text-accent">
 					{hub.home.cardCta}
-					{/* Arrow points along the reading direction, so it flips under RTL. */}
 					<span aria-hidden className="rtl:-scale-x-100">
 						→
 					</span>

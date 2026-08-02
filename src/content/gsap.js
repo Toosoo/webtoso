@@ -1,22 +1,9 @@
 /**
- * The GSAP course, in course order.
- *
- * Same rules as `./threejs.js`: array order is the course order, numbers and
- * URLs are derived. Every entry needs a real `gsap/<slug>/index.html` on disk.
- *
- * `youtubeUrl` carries `&list=…&index=…` so the link opens inside the playlist
- * rather than as a loose video. **The index is the video's position in the
- * playlist, not the lesson number here** — the two diverge because the site
- * groups by category while the playlist is chronological. `Keyframes` is lesson
- * 07 on the site and video #20 on YouTube.
- *
- * Extracted from the playlist on 2026-07-28. Eight playlist videos have no
- * lesson here: #09 Plugins & tools, #12 ScrollTrigger 3, #13 Community,
- * #16 ScrollSmoother 2, #19 CheatSheet, #21 DrawSVG, #25 Text Plugin,
- * #33 easeReverse.
+ * Same rules as `./threejs.js`. The `index` in each `youtubeUrl` is the video's
+ * position in the playlist, NOT the lesson number here — the two diverge because
+ * the site groups by category while the playlist is chronological.
  */
 
-/** Every lesson links back into this playlist. */
 const LIST = "PLVFwdndx21r651bnDaKzUfwcZBqEaQz7D";
 
 /** `("DcOhEW3omCo", 1)` → the full in-playlist watch URL. */

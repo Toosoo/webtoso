@@ -7,19 +7,10 @@ import { IconButton } from "./IconButton.jsx";
 import { Label } from "./Label.jsx";
 import { Tag } from "./Tag.jsx";
 
-/**
- * One lesson, in two layouts from a single DOM: a row on phones, a card from
- * `sm` up. The whole card is clickable via the title link's ::after overlay,
- * which keeps the markup to one <a> per destination and no click handlers.
- *
- * `media` fills the empty area on the card layout — pass a thumbnail later and
- * nothing else has to change.
- */
+/** `media` fills the empty area on the card layout — pass a thumbnail later. */
 export function LessonCard({ lesson, media }) {
 	const watchLabel = fill(hub.lessonCard.watchLabel, { title: lesson.title });
-	/** Keep the reader in the locale they are browsing. */
 	const href = `/${hub.locale}${lesson.url}`;
-	/** The lab shows demos, not lessons — the section supplies its own noun. */
 	const itemWord = sectionById(lesson.section)?.itemWord ?? hub.lessonWord;
 
 	return (
