@@ -1,36 +1,48 @@
 {
-  "name": "threejs",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
-  },
-  "devDependencies": {
-    "@biomejs/biome": "2.4.15",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^6.0.1",
-    "vite": "^8.0.9"
-  },
-  "dependencies": {
-    "@fontsource-variable/inter": "^5.3.0",
-    "@fontsource-variable/space-grotesk": "^5.3.0",
-    "@react-three/drei": "^10.7.7",
-    "@react-three/fiber": "^9.6.1",
-    "@tailwindcss/vite": "^4.2.4",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "gsap": "^3.14.2",
-    "lil-gui": "^0.21.0",
-    "react": "^19.2.5",
-    "react-dom": "^19.2.5",
-    "react-icons": "^5.5.0",
-    "stats.js": "^0.17.0",
-    "tailwind-merge": "^3.6.0",
-    "tailwindcss": "^4.2.4",
-    "three": "^0.182.0"
-  }
+	"name": "webtoso",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build",
+		"preview": "vite preview",
+		"lint": "biome check .",
+		"format": "biome check --write ."
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.4.15",
+		"@types/react": "^19.2.14",
+		"@types/react-dom": "^19.2.3",
+		"@vitejs/plugin-react": "^6.0.1",
+		"vite": "^8.0.9"
+	},
+	"dependencies": {
+		"@fontsource-variable/bricolage-grotesque": "^5.3.0",
+		"@fontsource-variable/cairo": "^5.3.0",
+		"@fontsource-variable/inter": "^5.3.0",
+		"@fontsource-variable/space-grotesk": "^5.3.0",
+		"@fontsource/anton": "^5.3.0",
+		"@fontsource/barriecito": "^5.3.0",
+		"@fontsource/boldonse": "^5.3.0",
+		"@fontsource/mystery-quest": "^5.3.0",
+		"@fontsource/poppins": "^5.3.0",
+		"@gsap/react": "^2.1.2",
+		"@lottiefiles/dotlottie-web": "^0.78.2",
+		"@react-three/drei": "^10.7.7",
+		"@react-three/fiber": "^9.6.1",
+		"@tailwindcss/vite": "^4.2.4",
+		"class-variance-authority": "^0.7.1",
+		"clsx": "^2.1.1",
+		"gsap": "^3.14.2",
+		"lil-gui": "^0.21.0",
+		"pixi.js": "^8.19.0",
+		"react": "^19.2.5",
+		"react-dom": "^19.2.5",
+		"react-icons": "^5.5.0",
+		"stats.js": "^0.17.0",
+		"tailwind-merge": "^3.6.0",
+		"tailwindcss": "^4.2.4",
+		"three": "^0.182.0"
+	}
 }

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/src/global-style.css">
+        <title>26</title>
+        <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="w-full bg-black overflow-hidden h-screen relative">
+        <div
+             class="h-screen w-full relative text-2xl p-30">
+                <div id="parent1"
+                     class="size-80 bg-white relative ">
+                     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">parent 1 </div>
+                        
+                     
+                     <div
+                             id="p1-child1"
+                             class="w-30 h-10 absolute text-center bg-yellow-300  ">
+                               child  </div> 
+                               
+                </div>
+                <div id="parent2"
+                     class="size-80 bg-red-400 relative ">
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">parent 2 </div>
+                        
+                        <div
+                             id="p2-child1"
+                             class="w-30 h-10 absolute text-center bg-blue-500  ">
+                             child  </div>
+                         
+                </div>
+        </div>
+        <script type="module" src="./main.js"></script>
+</body>
+
+</html>

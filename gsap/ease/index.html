@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/src/global-style.css">
+    <title>ease</title>
+    <style>
+        
+        .boldonse-regular {
+            font-family: "Boldonse", system-ui;
+            font-weight: 400;
+            font-style: normal;
+        }
+    </style>
+</head>
+
+<body class="boldonse-regular items-center justify-center h-screen flex flex-col gap-10 p-20 bg-gradient-to-t from-orange-400 to-white  text-white">
+    <div class="flex gap-3 [&_img]:size-30">
+        <img src="/assets/ease/E (black).webp" alt="" srcset="">
+        <img src="/assets/ease/A (black).webp" alt="" srcset="">
+        <img src="/assets/ease/S (black).webp" alt="" srcset="">
+        <img src="/assets/ease/E (black).webp" alt="" srcset="">
+    </div>
+    <script type="module">
+import "@fontsource/boldonse";
+import { gsap } from "gsap";
+
+        document.addEventListener("DOMContentLoaded", (event) => {
+
+
+
+            gsap.from('img', {
+                opacity: 0,
+                y: 100,
+                duration:5,
+                ease:"elastic"
+            })
+
+
+
+
+        });
+    </script>
+</body>
+
+</html>

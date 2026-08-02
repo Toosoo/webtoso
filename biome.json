@@ -4,5 +4,17 @@
 		"parser": {
 			"tailwindDirectives": true
 		}
+	},
+	"files": {
+		"includes": [
+			"**",
+			"!threejs",
+			"!gsap",
+			"!lab",
+			"!ar",
+			"!en",
+			"!dist",
+			"!vercel.json"
+		]
 	}
 }

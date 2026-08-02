@@ -1,0 +1,75 @@
+@import "@fontsource/boldonse";
+@import "@fontsource/poppins";
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+.font-boldonse {
+  font-family: "Boldonse", sans-serif;
+}
+
+.absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+nav a {
+  position: relative;
+}
+
+nav a.active::after {
+  content: "";
+  position: absolute;
+  bottom: 3px;
+  left: -15px;
+  width: 10px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  background-color: #fff;
+}
+
+nav a:not(.active) {
+  opacity: 0.5;
+}
+
+.line {
+  position: relative;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.1);
+  width: 1px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 50px;
+  height: 500px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+}
+.card:nth-child(even) {
+  margin-top: 200px;
+}
+
+.outlined-text {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
+  text-stroke: 1px rgba(255, 255, 255, 0.2);
+  color: transparent;
+}
+
+.draggable-card {
+  max-width: 500px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  position:absolute;
+  
+}

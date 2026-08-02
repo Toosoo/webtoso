@@ -1,64 +1,21 @@
-import { useState } from "react";
-import { Container } from "./components/Container.jsx";
-import { FilterBar } from "./components/FilterBar.jsx";
-import { Hero } from "./components/Hero.jsx";
-import { LessonGrid } from "./components/LessonGrid.jsx";
-import { SectionHeader } from "./components/SectionHeader.jsx";
-import { TopBar } from "./components/TopBar.jsx";
 import { hub } from "./hubData.js";
-import { lessons } from "./lessons.js";
-import { buildCourse } from "./lib/course.js";
+import { CourseIndex } from "./pages/CourseIndex.jsx";
+import { Landing } from "./pages/Landing.jsx";
 import "./styles/hub.css";
 
-const course = buildCourse(lessons, hub.categories);
-
+/**
+ * Two page shapes, one bundle, no router.
+ *
+ * Every page on this site is a real static HTML entry, so there is nothing to
+ * route — the shape is read from the path that Vercel already served.
+ * `hub.route.section` is null on `/<locale>/` and the section id on
+ * `/<locale>/<section>/`. An unrecognised section falls back to the landing
+ * page rather than rendering blank.
+ */
 function App() {
-	const [active, setActive] = useState("all");
+	const section = hub.sections.find((item) => item.id === hub.route.section);
 
-	const sections =
-		active === "all"
-			? course.sections
-			: course.sections.filter((section) => section.id === active);
-
-	const shown = sections.reduce((count, section) => count + section.count, 0);
-
-	return (
-		<>
-			<TopBar />
-			<main>
-				<Container className="pb-20">
-					<Hero total={course.total} />
-
-					<FilterBar
-						sections={course.sections}
-						active={active}
-						total={course.total}
-						onChange={setActive}
-					/>
-
-					<p aria-live="polite" className="sr-only">
-						Showing {shown} of {course.total} lessons
-					</p>
-
-					{sections.map((section) => (
-						<section
-							key={section.id}
-							aria-labelledby={`${section.id}-heading`}
-							className="mt-8 sm:mt-10"
-						>
-							<SectionHeader
-								headingId={`${section.id}-heading`}
-								range={section.range}
-								label={section.label}
-								count={section.count}
-							/>
-							<LessonGrid lessons={section.lessons} />
-						</section>
-					))}
-				</Container>
-			</main>
-		</>
-	);
+	return section ? <CourseIndex section={section} /> : <Landing />;
 }
 
 export default App;

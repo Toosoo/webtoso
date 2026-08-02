@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/src/global-style.css">
+  <title>timeline</title>
+  <style>
+    body {
+      font-family: "Roboto Condensed", sans-serif;
+    }
+
+    .boldonse-regular {
+      font-family: "Anton", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+    }
+  </style>
+</head>
+
+<body
+      class=" overflow-hidden bg-black/70 items-center justify-center h-screen flex  gap-10 p-6 ">
+  <div
+       class="red   invisible rounded-xl bg-red-400 grid place-content-center size-20">
+    1 </div>
+  <div
+       class="green invisible  rounded-xl bg-green-400 grid place-content-center size-20">
+    2 </div>
+  <div
+       class="blue  invisible rounded-xl bg-blue-400 grid place-content-center size-20">
+    3 </div>
+  <script type="module">
+    import "@fontsource/anton";
+    import { gsap } from "gsap";
+    import { GSDevTools } from "gsap/GSDevTools";
+
+
+
+    document.addEventListener("DOMContentLoaded", (event) => {
+      gsap.registerPlugin(GSDevTools)
+
+      const tl = gsap.timeline()
+
+      tl.from('div', {
+        autoAlpha: 0
+      })
+
+
+
+
+      GSDevTools.create()
+    });
+  </script>
+</body>
+
+</html>

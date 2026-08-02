@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>11 — Loading Manager</title>
+    <link rel="stylesheet" href="/src/global-style.css" />
+  </head>
+  <body class="lesson-canvas">
+    <canvas id="canvas" class="size-full"></canvas>
+
+    <div id="intro" class="fixed inset-0 bg-linear-to-br from-blue-100 to-purple-500 flex items-center justify-center">
+      <div class="space-y-2">
+        <h1 class="text-2xl font-bold">Loading...</h1>
+        <span id="progress" class="block w-0 h-2 bg-white rounded-full"></span>
+      </div>
+    </div>
+    
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

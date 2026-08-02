@@ -2,31 +2,53 @@
 @import "tailwindcss";
 @import "@fontsource-variable/inter";
 @import "@fontsource-variable/space-grotesk";
+/* Arabic. Inter and Space Grotesk have no Arabic glyphs. */
+@import "@fontsource-variable/cairo";
 
 @theme {
-	/* Sampled from the reference design. */
-	--color-canvas: #eae8e9; /* page background        */
-	--color-surface: #efeeef; /* cards, bars, top bar   */
-	--color-blush: #f4e4e1; /* every 3rd card         */
-	--color-ink: #201e1c; /* text, rules            */
-	--color-muted: #686564; /* labels: AA on all three surfaces */
-	--color-accent: #ec3113; /* red                    */
-	--color-hairline: rgb(0 0 0 / 0.12); /* self-tints per surface */
-	--color-dot: #afadae; /* background grid        */
+	/*
+	 * Dark theme. `canvas` and `ink` are the two values chosen directly; the rest
+	 * are derived from them, because the palette only works as a set — the old
+	 * light `surface` (#efeeef) under the new cream `ink` measured 1.05:1, which
+	 * is every card, the top bar and every section header rendered unreadable.
+	 *
+	 * Every pairing that carries text is AA or better. Measured, not assumed:
+	 *   ink on canvas 17.5:1   ink on surface 16.2:1
+	 *   muted on canvas 7.1:1  muted on surface 6.6:1  accent on surface 5.6:1
+	 *   canvas on highlight 11.3:1
+	 */
+	--color-canvas: #0f0d0e; /* page background        */
+	--color-surface: #1a1617; /* cards, bars            */
+	--color-ink: #f9f4da; /* text, rules            */
+	--color-muted: #a39c93; /* labels: AA on both surfaces */
+	--color-accent: #ff5436; /* red, lifted for dark   */
+	--color-highlight: #fcba28; /* section header band    */
+	/* White, not black — a black hairline is invisible on a near-black page. */
+	--color-hairline: rgb(255 255 255 / 0.14);
 
-	--font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
-	--font-display: "Space Grotesk Variable", "Inter Variable", sans-serif;
+	/*
+	 * Latin face first, Arabic second. A browser uses the first font in the
+	 * stack that actually has the glyph, so Latin text renders in Inter and
+	 * Arabic falls through to Cairo — which is what makes a mixed title like
+	 * "كورس three.js" render correctly in one run of text.
+	 *
+	 * Fontsource ships unicode-range per subset, so an English page never
+	 * downloads the Arabic files.
+	 */
+	--font-sans:
+		"Inter Variable", "Cairo Variable", ui-sans-serif, system-ui, sans-serif;
+	--font-display:
+		"Space Grotesk Variable", "Inter Variable", "Cairo Variable", sans-serif;
 }
 
 @layer base {
 	body {
+		/*
+		 * The dot grid that used to sit here is gone by choice. The background
+		 * colour is not optional though — without it the page falls back to the
+		 * browser default white and the cream `ink` becomes invisible.
+		 */
 		background-color: var(--color-canvas);
-		background-image: radial-gradient(
-			circle at 1px 1px,
-			var(--color-dot) 1px,
-			transparent 0
-		);
-		background-size: 24px 24px;
 		color: var(--color-ink);
 		-webkit-font-smoothing: antialiased;
 	}

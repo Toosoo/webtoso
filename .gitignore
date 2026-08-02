@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Generated locale trees — see vite.config.js
+/ar/
+/en/
+
+# Working plan — local only, carries absolute paths and internal notes
+/PLAN.md

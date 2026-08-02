@@ -1,0 +1,50 @@
+@import "@fontsource/mystery-quest";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.mystery-quest-regular {
+  font-family: "Mystery Quest", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+  font-family: "Mystery Quest", system-ui;
+  color: #fff;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.snowflake {
+  position: absolute;
+  top: -50px;
+  left: 0;
+  width: 12px;
+  height: 6px;
+  border-radius: 100vw;
+}
+.cloud {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 120px;
+}
+.tree {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 80px;
+}

@@ -1,6 +1,6 @@
 import { cn } from "../lib/cn.js";
 
-/** Small letterspaced uppercase type: eyebrow, FILTER, LESSON 01. */
+/** Small letterspaced uppercase type: FILTER, LESSON 01, section headings. */
 export function Label({ as: Comp = "span", className, children, ...props }) {
 	return (
 		<Comp
