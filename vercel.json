@@ -2,20 +2,31 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "headers": [
     { "source": "/assets/:file", "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] },
-    { "source": "/assets/:dir/:path*", "headers": [{ "key": "Cache-Control", "value": "public, max-age=3600, must-revalidate" }] }
+    { "source": "/assets/:dir/:path+", "headers": [{ "key": "Cache-Control", "value": "public, max-age=3600, must-revalidate" }] }
   ],
   "redirects": [
+    { "source": "/lessons/2-basics/", "destination": "/en/threejs/basics/", "permanent": true },
     { "source": "/lessons/2-basics/:path*", "destination": "/en/threejs/basics/:path*", "permanent": true },
+    { "source": "/lessons/3-basics2/", "destination": "/en/threejs/basics-2/", "permanent": true },
     { "source": "/lessons/3-basics2/:path*", "destination": "/en/threejs/basics-2/:path*", "permanent": true },
+    { "source": "/lessons/4-responsive-design/", "destination": "/en/threejs/responsive-design/", "permanent": true },
     { "source": "/lessons/4-responsive-design/:path*", "destination": "/en/threejs/responsive-design/:path*", "permanent": true },
+    { "source": "/lessons/6-buffer-geometry/", "destination": "/en/threejs/buffer-geometry/", "permanent": true },
     { "source": "/lessons/6-buffer-geometry/:path*", "destination": "/en/threejs/buffer-geometry/:path*", "permanent": true },
+    { "source": "/lessons/7-cameras-controls/", "destination": "/en/threejs/cameras-controls/", "permanent": true },
     { "source": "/lessons/7-cameras-controls/:path*", "destination": "/en/threejs/cameras-controls/:path*", "permanent": true },
+    { "source": "/lessons/8-materials/", "destination": "/en/threejs/materials/", "permanent": true },
     { "source": "/lessons/8-materials/:path*", "destination": "/en/threejs/materials/:path*", "permanent": true },
+    { "source": "/lessons/9-debug/", "destination": "/en/threejs/debug/", "permanent": true },
     { "source": "/lessons/9-debug/:path*", "destination": "/en/threejs/debug/:path*", "permanent": true },
+    { "source": "/lessons/10-textures/", "destination": "/en/threejs/textures/", "permanent": true },
     { "source": "/lessons/10-textures/:path*", "destination": "/en/threejs/textures/:path*", "permanent": true },
+    { "source": "/lessons/11-loading-manager/", "destination": "/en/threejs/loading-manager/", "permanent": true },
     { "source": "/lessons/11-loading-manager/:path*", "destination": "/en/threejs/loading-manager/:path*", "permanent": true },
+    { "source": "/lessons/12-lights/", "destination": "/en/threejs/lights/", "permanent": true },
     { "source": "/lessons/12-lights/:path*", "destination": "/en/threejs/lights/:path*", "permanent": true },
 
+    { "source": "/lessons/", "destination": "/en/threejs/", "permanent": true },
     { "source": "/lessons/:path*", "destination": "/en/threejs/:path*", "permanent": true },
 
     { "source": "/", "destination": "/ar/", "permanent": false }
