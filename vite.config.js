@@ -8,7 +8,7 @@ import { seo } from "./plugins/seo.js";
 import { sections } from "./src/content/index.js";
 import { LOCALES, t } from "./src/i18n.js";
 
-const root = __dirname;
+const root = import.meta.dirname;
 
 /**
  * Locale trees are generated, gitignored, and live in the project root because
