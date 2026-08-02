@@ -11,10 +11,12 @@
 @source "../gsap";
 @source "../lab";
 
-html,
-body {
-	margin: 0;
-	min-height: 100vh;
+@layer base {
+	html,
+	body {
+		margin: 0;
+		min-height: 100vh;
+	}
 }
 
 /* Opt-in: scroll-driven lessons must NOT get this lock. */
