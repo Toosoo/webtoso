@@ -24,6 +24,17 @@ import { fill, localeFromPath, t } from "./i18n.js";
  * ones that don't load that file at all.
  */
 
+/*
+ * `highlight` on `canvas`, the same dark-on-bright pairing `SectionHeader` uses
+ * and the only bright fill in the palette — which is what this bar wants to be,
+ * since it floats over 44 different lesson backgrounds and cannot rely on any
+ * of them for contrast. Measured in hub.css: canvas on highlight is 11.3:1.
+ *
+ * These values are copied from that file's `@theme` block by hand, the same way
+ * `public/404.html` copies them, and for the same reason: this module is
+ * self-contained so that it renders identically on the two React lessons, which
+ * load no stylesheet at all. Nothing will warn you if the theme moves.
+ */
 const CSS = `
 .lesson-chrome {
 	position: fixed;
@@ -36,10 +47,15 @@ const CSS = `
 	/* Percent, not vw: the bar is fixed, so 100% is the viewport *without* the
 	   scrollbar — and 12 of these lessons are scroll-driven. */
 	max-width: calc(100% - 20px);
-	background: #efeeef;
-	border: 1px solid rgb(0 0 0 / 0.12);
-	box-shadow: 0 6px 20px rgb(0 0 0 / 0.2);
-	color: #201e1c;
+	background: #fcba28;
+	/*
+	 * SectionHeader drops its border because the fill already defines the edge,
+	 * but that holds only against a known background. Over a lesson canvas the
+	 * bar can land on anything, so it keeps a rim and a shadow.
+	 */
+	border: 1px solid rgb(15 13 14 / 0.18);
+	box-shadow: 0 6px 20px rgb(0 0 0 / 0.28);
+	color: #0f0d0e;
 	font-family: "Inter Variable", "Cairo Variable", ui-sans-serif, system-ui,
 		sans-serif;
 	-webkit-font-smoothing: antialiased;
@@ -62,15 +78,21 @@ const CSS = `
 	transition: background-color 0.15s, color 0.15s;
 }
 
+/*
+ * Hover inverts rather than tints. A one-hue bar has no second colour to move
+ * to — the old red hover would now sit accent-on-highlight, two bright warms at
+ * roughly 1.5:1 — so the two values swap instead, which stays at 11.3:1 both
+ * ways round.
+ */
 a.lesson-chrome__home:hover,
 a.lesson-chrome__step:hover {
-	background: #eae8e9;
-	color: #ec3113;
+	background: #0f0d0e;
+	color: #fcba28;
 }
 
 .lesson-chrome__home:focus-visible,
 .lesson-chrome__step:focus-visible {
-	outline: 2px solid #201e1c;
+	outline: 2px solid #0f0d0e;
 	outline-offset: -2px;
 }
 
@@ -84,7 +106,7 @@ a.lesson-chrome__step:hover {
 
 /* First item has no previous, last has no next: the slot stays, greyed out. */
 .lesson-chrome__step--off {
-	color: rgb(0 0 0 / 0.22);
+	color: rgb(15 13 14 / 0.35);
 }
 
 /*
@@ -99,7 +121,7 @@ a.lesson-chrome__step:hover {
 .lesson-chrome__divider {
 	width: 1px;
 	flex: none;
-	background: rgb(0 0 0 / 0.12);
+	background: rgb(15 13 14 / 0.18);
 }
 
 .lesson-chrome__label {
@@ -127,13 +149,18 @@ a.lesson-chrome__step:hover {
 	text-overflow: ellipsis;
 }
 
+/*
+ * The number used to be picked out in the accent. On a single-hue bar that is
+ * no longer available, so the hierarchy moves to weight: the number is heavier
+ * than the title beside it rather than a different colour.
+ */
 .lesson-chrome__number {
-	color: #ec3113;
+	font-weight: 700;
 	font-variant-numeric: tabular-nums;
 }
 
 .lesson-chrome__dot {
-	color: rgb(0 0 0 / 0.3);
+	color: rgb(15 13 14 / 0.4);
 }
 
 @media (max-width: 420px) {

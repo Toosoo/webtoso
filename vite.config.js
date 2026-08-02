@@ -3,6 +3,7 @@ import { dirname, resolve } from "node:path";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
+import { prerender } from "./plugins/prerender.js";
 import { seo } from "./plugins/seo.js";
 import { sections } from "./src/content/index.js";
 import { LOCALES, t } from "./src/i18n.js";
@@ -103,7 +104,7 @@ function generateLocaleEntries() {
 }
 
 export default defineConfig({
-	plugins: [react(), tailwindcss(), seo()],
+	plugins: [react(), tailwindcss(), seo(), prerender()],
 	server: {
 		port: 3000,
 		host: true,

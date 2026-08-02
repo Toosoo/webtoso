@@ -1,12 +1,14 @@
 {
-	"name": "threejs",
+	"name": "webtoso",
 	"private": true,
 	"version": "0.0.0",
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
 		"build": "vite build",
-		"preview": "vite preview"
+		"preview": "vite preview",
+		"lint": "biome check .",
+		"format": "biome check --write ."
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.4.15",

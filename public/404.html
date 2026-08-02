@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>404 — webtoso</title>
   <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#0f0d0e" />
   <!--
     Self-contained on purpose, the same way the lesson chrome bar is.
 
@@ -15,19 +16,44 @@
     anything upstream changed, which is the exact failure this page exists to
     catch. Inlined CSS and a system font stack cannot break that way.
 
+    The cost of that independence is drift: this file carried the retired light
+    palette for as long as the hub was dark, because nothing links the two. The
+    tokens below are copied from `src/styles/hub.css` and have to be re-copied
+    by hand if that file's `@theme` block changes. There is no build step that
+    will tell you — the only guard is remembering that this page exists.
+
     Bilingual because one file answers every bad URL and the locale is unknown
     at that point: /ar/typo and /en/typo both land here. Arabic leads, matching
     decision 25's root redirect.
   -->
   <style>
     :root {
-      --canvas: #eae8e9;
-      --surface: #efeeef;
-      --ink: #201e1c;
-      --muted: #686564;
-      --accent: #ec3113;
-      --hairline: rgb(0 0 0 / 0.12);
-      --dot: #afadae;
+      /*
+       * Mirrors the @theme block in src/styles/hub.css. The contrast figures
+       * recorded there hold here because the pairings are the same ones:
+       * ink on canvas 17.5:1, ink on surface 16.2:1, muted on surface 6.6:1,
+       * canvas on accent 6.06:1.
+       */
+      --canvas: #0f0d0e;
+      --surface: #1a1617;
+      --ink: #f9f4da;
+      --muted: #a39c93;
+      --accent: #ff5436;
+      /* White, not black — a black hairline is invisible on a near-black page. */
+      --hairline: rgb(255 255 255 / 0.14);
+    }
+
+    /*
+     * The hub's real faces are Fontsource woff2 files, and Vite hashes them, so
+     * this page cannot @font-face them for the same reason it cannot link the
+     * stylesheet. Naming them first still pays off for anyone who has them
+     * installed locally, and costs nothing for everyone else — the same stack
+     * the lesson chrome bar uses.
+     */
+    :root {
+      --font-sans: "Inter Variable", "Cairo Variable", ui-sans-serif, system-ui,
+        -apple-system, "Segoe UI", sans-serif;
+      --font-display: "Space Grotesk Variable", var(--font-sans);
     }
 
     * {
@@ -41,22 +67,38 @@
     }
 
     body {
+      /*
+       * The dot grid is gone, matching the hub — see the note on `body` in
+       * hub.css. The background colour is not optional: without it the page
+       * falls back to browser white and the cream ink becomes invisible.
+       */
       background-color: var(--canvas);
-      background-image: radial-gradient(circle at 1px 1px, var(--dot) 1px, transparent 0);
-      background-size: 24px 24px;
       color: var(--ink);
-      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-family: var(--font-sans);
       -webkit-font-smoothing: antialiased;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
-      padding: 2rem 1.25rem;
       gap: 2.5rem;
+      /* The hub's gutter scale, one step in from Container's max width. */
+      padding: 3rem 1rem;
     }
 
+    @media (min-width: 40rem) {
+      body {
+        padding: 3.5rem 2rem;
+      }
+    }
+
+    .shell {
+      width: 100%;
+      max-width: 46rem;
+      margin-inline: auto;
+    }
+
+    /* Brand — the accent square + letterspaced wordmark from TopBar. */
     .brand {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 0.75rem;
       text-decoration: none;
@@ -71,56 +113,64 @@
     }
 
     .brand-name {
+      font-family: var(--font-display);
       font-size: 0.8125rem;
       font-weight: 700;
       letter-spacing: 0.16em;
       text-transform: uppercase;
     }
 
+    /* Masthead — the Hero + Rule pairing, at the same type settings. */
     .code {
+      font-family: var(--font-display);
       font-size: clamp(4.5rem, 18vw, 8rem);
-      line-height: 1;
+      line-height: 0.85;
       font-weight: 700;
-      color: var(--accent);
+      letter-spacing: -0.045em;
       margin: 0;
-      letter-spacing: -0.02em;
+    }
+
+    .rule {
+      height: 4px;
+      width: 100%;
+      background: var(--ink);
+      margin-top: 1.25rem;
     }
 
     .panel {
-      background: var(--surface);
-      border: 1px solid var(--hairline);
-      width: 100%;
-      max-width: 46rem;
       display: grid;
       grid-template-columns: 1fr;
-    }
-
-    .locale {
-      padding: 1.75rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .locale + .locale {
-      border-top: 1px solid var(--hairline);
+      gap: 1px;
+      margin-top: 2rem;
+      background: var(--hairline);
+      border: 1px solid var(--hairline);
     }
 
     @media (min-width: 40rem) {
       .panel {
         grid-template-columns: 1fr 1fr;
       }
+    }
 
-      .locale + .locale {
-        border-top: 0;
-        border-inline-start: 1px solid var(--hairline);
-      }
+    /*
+     * Cards are `surface` on `canvas`, like LessonCard. The 1px gap on the grid
+     * shows the container's background through as the divider, so the seam
+     * between the two locales is the same hairline as the outer border in both
+     * the stacked and the side-by-side layout — no direction-aware border to
+     * flip when the document is RTL.
+     */
+    .locale {
+      background: var(--surface);
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
     }
 
     .label {
       font-size: 0.6875rem;
-      font-weight: 700;
-      letter-spacing: 0.16em;
+      font-weight: 500;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--muted);
       margin: 0;
@@ -128,37 +178,62 @@
 
     .message {
       margin: 0;
-      font-size: 1.0625rem;
+      font-size: 0.9375rem;
       line-height: 1.6;
+      /* The hub's body tone: ink at 85% over its surface. */
+      color: color-mix(in srgb, var(--ink) 85%, var(--surface));
     }
 
     .links {
       list-style: none;
-      margin: 0;
+      margin: 0.25rem 0 0;
       padding: 0;
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
     }
 
+    /* Chip, inverted for a surface background: the fill drops to canvas. */
     .links a {
-      display: inline-block;
-      padding: 0.4375rem 0.8125rem;
+      display: inline-flex;
+      align-items: center;
+      padding: 0.375rem 0.75rem;
       border: 1px solid var(--hairline);
       background: var(--canvas);
       color: var(--ink);
       text-decoration: none;
-      font-size: 0.875rem;
-      line-height: 1.2;
-      transition: background-color 0.15s ease, border-color 0.15s ease;
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      transition: border-color 0.15s ease, background-color 0.15s ease,
+        color 0.15s ease;
     }
 
     .links a:hover {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #fff;
+      border-color: var(--ink);
     }
 
+    /*
+     * Home is the primary action, styled like an active filter chip. Near-black
+     * on the accent rather than white: this is 0.6875rem uppercase text, and
+     * white on the lifted accent measures 3.19:1 — under AA. `canvas` gives
+     * 6.06:1.
+     */
+    .links a.primary {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: var(--canvas);
+    }
+
+    .links a.primary:hover {
+      border-color: var(--ink);
+      background: var(--ink);
+      color: var(--canvas);
+    }
+
+    .brand:focus-visible,
     .links a:focus-visible {
       outline: 2px solid var(--ink);
       outline-offset: 2px;
@@ -167,38 +242,43 @@
 </head>
 
 <body>
-  <a class="brand" href="/" aria-label="webtoso">
-    <span class="brand-mark" aria-hidden="true"></span>
-    <span class="brand-name">webtoso</span>
-  </a>
-
-  <!-- A lone numeral is bidi-neutral, but this document is RTL and this repo
-       has shipped a reversed range before. Pinning it costs nothing. -->
-  <p class="code" dir="ltr">404</p>
-
-  <div class="panel">
-    <section class="locale" lang="ar" dir="rtl">
-      <p class="label">عذرًا</p>
-      <p class="message">الصفحة دي مش موجودة. يمكن الرابط اتغيّر، أو فيه غلطة في العنوان.</p>
-      <ul class="links">
-        <li><a href="/ar/">الرئيسية</a></li>
-        <li><a href="/ar/threejs/">three.js</a></li>
-        <li><a href="/ar/gsap/">GSAP</a></li>
-        <li><a href="/ar/lab/">أمثلة</a></li>
-      </ul>
-    </section>
-
-    <section class="locale" lang="en" dir="ltr">
-      <p class="label">Not found</p>
-      <p class="message">This page doesn't exist. The link may have changed, or the address has a typo.</p>
-      <ul class="links">
-        <li><a href="/en/">Home</a></li>
-        <li><a href="/en/threejs/">three.js</a></li>
-        <li><a href="/en/gsap/">GSAP</a></li>
-        <li><a href="/en/lab/">Lab</a></li>
-      </ul>
-    </section>
+  <div class="shell">
+    <a class="brand" href="/" aria-label="webtoso">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name">webtoso</span>
+    </a>
   </div>
+
+  <main class="shell">
+    <!-- A lone numeral is bidi-neutral, but this document is RTL and this repo
+         has shipped a reversed range before. Pinning it costs nothing. -->
+    <h1 class="code" dir="ltr">404</h1>
+    <div class="rule" aria-hidden="true"></div>
+
+    <div class="panel">
+      <section class="locale" lang="ar" dir="rtl">
+        <p class="label">عذرًا</p>
+        <p class="message">الصفحة دي مش موجودة. يمكن الرابط اتغيّر، أو فيه غلطة في العنوان.</p>
+        <ul class="links">
+          <li><a class="primary" href="/ar/">الرئيسية</a></li>
+          <li><a href="/ar/threejs/">three.js</a></li>
+          <li><a href="/ar/gsap/">GSAP</a></li>
+          <li><a href="/ar/lab/">أمثلة</a></li>
+        </ul>
+      </section>
+
+      <section class="locale" lang="en" dir="ltr">
+        <p class="label">Not found</p>
+        <p class="message">This page doesn't exist. The link may have changed, or the address has a typo.</p>
+        <ul class="links">
+          <li><a class="primary" href="/en/">Home</a></li>
+          <li><a href="/en/threejs/">three.js</a></li>
+          <li><a href="/en/gsap/">GSAP</a></li>
+          <li><a href="/en/lab/">Lab</a></li>
+        </ul>
+      </section>
+    </div>
+  </main>
 </body>
 
 </html>

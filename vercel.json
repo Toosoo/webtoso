@@ -1,5 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "headers": [
+    { "source": "/assets/:file", "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] },
+    { "source": "/assets/:dir/:path*", "headers": [{ "key": "Cache-Control", "value": "public, max-age=3600, must-revalidate" }] }
+  ],
   "redirects": [
     { "source": "/lessons/2-basics/:path*", "destination": "/en/threejs/basics/:path*", "permanent": true },
     { "source": "/lessons/3-basics2/:path*", "destination": "/en/threejs/basics-2/:path*", "permanent": true },
