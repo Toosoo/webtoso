@@ -18,7 +18,6 @@ const iconButton = cva(
 	},
 );
 
-/** Square hairline icon button. Renders as <button> unless `as` says otherwise. */
 export function IconButton({
 	as: Comp = "button",
 	size,

@@ -1,14 +1,7 @@
 /** Two-digit display number: 1 -> "01". */
 export const pad = (n) => String(n).padStart(2, "0");
 
-/**
- * Derives everything the hub renders from one section's raw item list: display
- * numbers, URLs, category groups and per-group counts.
- *
- * Nothing here is hand-maintained — adding an item to a content file updates the
- * numbering and the "ALL n" pill on its own. Numbering is per-section, so every
- * course starts at 01.
- */
+/** Numbering is per-section, so every course starts at 01. */
 export function buildCourse(lessons, categories, sectionId) {
 	const numbered = lessons.map((lesson, index) => ({
 		...lesson,

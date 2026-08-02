@@ -3,15 +3,9 @@ import { lab } from "./lab.js";
 import { threejs } from "./threejs.js";
 
 /**
- * The three content sections of the site, in nav order.
- *
- * A "section" is one top-level URL segment and one folder of entry points:
- * `/threejs/lights/` is built from `threejs/lights/index.html`. Adding a fourth
- * section means adding a content file here and a folder on disk — the build,
- * the SEO metadata, the sitemap and the chrome bar all derive from this list.
- *
- * Sections with no items are dropped, so a section can be scaffolded before it
- * has content without rendering an empty shell.
+ * One section = one top-level URL segment and one folder of entry points:
+ * `/threejs/lights/` is built from `threejs/lights/index.html`. The build, the
+ * SEO metadata, the sitemap and the chrome bar all derive from this list.
  */
 const ALL = [
 	{ id: "threejs", items: threejs },
@@ -21,13 +15,8 @@ const ALL = [
 
 export const sections = ALL.filter((section) => section.items.length > 0);
 
-/** `("threejs", "lights")` → `"/threejs/lights/"`. Never stored, always derived. */
 export const lessonUrl = (sectionId, slug) => `/${sectionId}/${slug}/`;
 
-/**
- * Every item across every section, each tagged with its section and its
- * 1-based position within that section.
- */
 export const allItems = sections.flatMap((section) =>
 	section.items.map((item, index) => ({
 		...item,

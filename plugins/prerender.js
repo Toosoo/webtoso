@@ -9,31 +9,14 @@ import { LOCALES } from "../src/i18n.js";
 import { site } from "../src/site.js";
 
 /**
- * Renders the eight hub pages to static HTML at build time.
- *
- * Decision 13 puts every word the site owns on the hubs — lesson pages carry no
- * prose at all. But the hubs are a React app mounted into `<div id="root">`, so
- * until this plugin existed all eight shipped as an empty div: the entire
- * indexable surface of the site was invisible to anything that would not run
- * JavaScript, and to Google until its deferred render pass came around. The
- * meta, hreflang and JSON-LD were always static; the body was not.
- *
- * The eight pages are the root landing page and the three course indexes, in
- * both locales. Lesson pages are deliberately not prerendered — they have no
- * React on them at all.
+ * Renders the eight hub pages (landing + three course indexes, both locales) to
+ * static HTML at build. Lesson pages have no React and are not prerendered.
  */
 
 /**
- * The hub reads its locale and route from `location.pathname` once, at module
- * scope in `hubData.js`, and every component imports the resulting singleton.
- * That is what keeps the components free of locale plumbing, and it is also why
- * eight pages need eight *evaluations* of that module rather than eight calls to
- * a render function.
- *
- * So each page stubs `location`, throws away the SSR module graph and loads the
- * app fresh. `invalidateAll()` is the load-bearing line — without it the second
- * page through the loop reuses the first page's `hub` and every locale renders
- * as Arabic.
+ * `hubData.js` reads `location.pathname` once at module scope, so each page
+ * needs a fresh evaluation of that module. `invalidateAll()` is load-bearing —
+ * without it every page after the first renders in the first page's locale.
  */
 async function renderAt(server, path) {
 	Object.defineProperty(globalThis, "location", {
@@ -54,7 +37,6 @@ export function prerender() {
 
 	return {
 		name: "hub-prerender",
-		/** Nothing to prerender in dev — the app mounts client-side as usual. */
 		apply: "build",
 
 		configResolved(config) {
@@ -62,24 +44,14 @@ export function prerender() {
 			outDir = config.build.outDir;
 		},
 
-		/**
-		 * `closeBundle`, not `generateBundle`: the HTML has to be on disk already.
-		 * These files are Vite's own output — script tags, hashed asset links and
-		 * everything `seo.js` injected — and this step only fills in the empty root
-		 * div, so the rest of the pipeline stays untouched.
-		 */
+		/** `closeBundle`, not `generateBundle`: the HTML must already be on disk. */
 		async closeBundle() {
 			const paths = LOCALES.flatMap((locale) => [
 				`/${locale}/`,
 				...sections.map((section) => `/${locale}/${section.id}/`),
 			]);
 
-			/**
-			 * `configFile: false` is what stops this from recursing: a child server
-			 * that read `vite.config.js` would load this plugin again. The two
-			 * plugins it does need are the JSX transform and Tailwind, the latter
-			 * only so that `App.jsx`'s `import "./styles/hub.css"` resolves.
-			 */
+			/** `configFile: false` stops this recursing into itself. */
 			const { createServer } = await import("vite");
 			const server = await createServer({
 				configFile: false,
@@ -101,13 +73,7 @@ export function prerender() {
 					const markup = await renderAt(server, path);
 					const html = readFileSync(file, "utf8");
 
-					/**
-					 * An exact-match replace, and a hard failure if it does not match.
-					 * A silent no-op here would ship the empty-div build again while the
-					 * build stayed green — the same class of failure as the bare
-					 * `href="style.css"` that `absolutise()` in vite.config.js exists to
-					 * catch.
-					 */
+					/** Hard failure, not a silent no-op — that would ship empty pages. */
 					const marker = '<div id="root"></div>';
 					if (!html.includes(marker)) {
 						this.error(`prerender: ${path} has no empty '${marker}' to fill`);

@@ -8,48 +8,23 @@
   <meta name="robots" content="noindex" />
   <meta name="theme-color" content="#0f0d0e" />
   <!--
-    Self-contained on purpose, the same way the lesson chrome bar is.
+    Self-contained: this file is copied verbatim and unhashed, so it cannot link
+    the hub's hashed stylesheet. Colours below are hand-copied from
+    src/styles/hub.css and nothing syncs them.
 
-    This file lives in `public/`, which Vite copies verbatim and does NOT
-    content-hash (decision 18). The hub's Tailwind bundle IS hashed, so its
-    filename changes on every build — a <link> to it here would 404 the moment
-    anything upstream changed, which is the exact failure this page exists to
-    catch. Inlined CSS and a system font stack cannot break that way.
-
-    The cost of that independence is drift: this file carried the retired light
-    palette for as long as the hub was dark, because nothing links the two. The
-    tokens below are copied from `src/styles/hub.css` and have to be re-copied
-    by hand if that file's `@theme` block changes. There is no build step that
-    will tell you — the only guard is remembering that this page exists.
-
-    Bilingual because one file answers every bad URL and the locale is unknown
-    at that point: /ar/typo and /en/typo both land here. Arabic leads, matching
-    decision 25's root redirect.
+    Bilingual because one file answers every bad URL in both locales.
   -->
   <style>
     :root {
-      /*
-       * Mirrors the @theme block in src/styles/hub.css. The contrast figures
-       * recorded there hold here because the pairings are the same ones:
-       * ink on canvas 17.5:1, ink on surface 16.2:1, muted on surface 6.6:1,
-       * canvas on accent 6.06:1.
-       */
       --canvas: #0f0d0e;
       --surface: #1a1617;
       --ink: #f9f4da;
       --muted: #a39c93;
       --accent: #ff5436;
-      /* White, not black — a black hairline is invisible on a near-black page. */
       --hairline: rgb(255 255 255 / 0.14);
     }
 
-    /*
-     * The hub's real faces are Fontsource woff2 files, and Vite hashes them, so
-     * this page cannot @font-face them for the same reason it cannot link the
-     * stylesheet. Naming them first still pays off for anyone who has them
-     * installed locally, and costs nothing for everyone else — the same stack
-     * the lesson chrome bar uses.
-     */
+    /* The real faces are hashed woff2 files this page cannot @font-face. */
     :root {
       --font-sans: "Inter Variable", "Cairo Variable", ui-sans-serif, system-ui,
         -apple-system, "Segoe UI", sans-serif;
@@ -67,11 +42,6 @@
     }
 
     body {
-      /*
-       * The dot grid is gone, matching the hub — see the note on `body` in
-       * hub.css. The background colour is not optional: without it the page
-       * falls back to browser white and the cream ink becomes invisible.
-       */
       background-color: var(--canvas);
       color: var(--ink);
       font-family: var(--font-sans);
@@ -80,7 +50,6 @@
       flex-direction: column;
       justify-content: center;
       gap: 2.5rem;
-      /* The hub's gutter scale, one step in from Container's max width. */
       padding: 3rem 1rem;
     }
 
@@ -96,7 +65,6 @@
       margin-inline: auto;
     }
 
-    /* Brand — the accent square + letterspaced wordmark from TopBar. */
     .brand {
       display: inline-flex;
       align-items: center;
@@ -120,7 +88,6 @@
       text-transform: uppercase;
     }
 
-    /* Masthead — the Hero + Rule pairing, at the same type settings. */
     .code {
       font-family: var(--font-display);
       font-size: clamp(4.5rem, 18vw, 8rem);
@@ -152,13 +119,8 @@
       }
     }
 
-    /*
-     * Cards are `surface` on `canvas`, like LessonCard. The 1px gap on the grid
-     * shows the container's background through as the divider, so the seam
-     * between the two locales is the same hairline as the outer border in both
-     * the stacked and the side-by-side layout — no direction-aware border to
-     * flip when the document is RTL.
-     */
+    /* The 1px grid gap shows the container through as the divider — no
+       direction-aware border to flip under RTL. */
     .locale {
       background: var(--surface);
       padding: 1.75rem;
@@ -180,7 +142,6 @@
       margin: 0;
       font-size: 0.9375rem;
       line-height: 1.6;
-      /* The hub's body tone: ink at 85% over its surface. */
       color: color-mix(in srgb, var(--ink) 85%, var(--surface));
     }
 
@@ -193,7 +154,6 @@
       gap: 0.5rem;
     }
 
-    /* Chip, inverted for a surface background: the fill drops to canvas. */
     .links a {
       display: inline-flex;
       align-items: center;
@@ -215,12 +175,6 @@
       border-color: var(--ink);
     }
 
-    /*
-     * Home is the primary action, styled like an active filter chip. Near-black
-     * on the accent rather than white: this is 0.6875rem uppercase text, and
-     * white on the lifted accent measures 3.19:1 — under AA. `canvas` gives
-     * 6.06:1.
-     */
     .links a.primary {
       border-color: var(--accent);
       background: var(--accent);
@@ -250,8 +204,6 @@
   </div>
 
   <main class="shell">
-    <!-- A lone numeral is bidi-neutral, but this document is RTL and this repo
-         has shipped a reversed range before. Pinning it costs nothing. -->
     <h1 class="code" dir="ltr">404</h1>
     <div class="rule" aria-hidden="true"></div>
 

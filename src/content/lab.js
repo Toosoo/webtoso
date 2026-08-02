@@ -1,24 +1,7 @@
 /**
- * The lab — finished demos, not lessons.
- *
- * Same rules as the courses: array order is display order, URLs are derived,
- * every entry needs a real `lab/<slug>/index.html` on disk.
- *
- * `examples/1-playground` and `examples/test` are deliberately absent: one is a
- * single scratch file titled "Lesson 5", the other has an empty `<title>` and
- * is a throwaway timeline experiment. Neither belongs in a showcase.
- *
- * Videos come from the "تطبيقات الدروس" playlist, extracted 2026-07-28 and
- * re-extracted 2026-07-30. Three of its eleven videos have no demo here yet:
- * #001 Stagger Text, #008 Video Scrub, #010 Stack Cards.
- *
- * `creative-dev` and `lottie-scrolltrigger` carry no `youtubeUrl` — they are not
- * obviously in this playlist, and they are the first two items on the site
- * without a video. The card and the chrome bar both handle its absence; the
- * watch link simply doesn't render.
- *
- * Array order follows the category order in `i18n.sections.lab.categories`
- * (scroll → components → sites), which is the order the hub renders them in.
+ * Finished demos, not lessons. Same rules as the courses. Array order follows
+ * the category order in `i18n.sections.lab.categories`. `youtubeUrl` is
+ * optional — the card and the chrome bar both handle its absence.
  */
 
 /** The demos playlist — a different one from the GSAP course. */
@@ -97,17 +80,7 @@ export const lab = [
 		youtubeUrl: watch("ipYpvV0IuK4", 11),
 	},
 	/*
-	 * Held back — the demo is not finished. Everything but the bird is commented
-	 * out in its main.js: the motionPath tween, the pixi snow, the clouds, the
-	 * trees. It registers ScrollTrigger and never calls it, so it has no scroll
-	 * animation despite the name, and the lab is introduced as finished pieces.
-	 *
-	 * The folder, its assets and its deps (pixi.js, @lottiefiles/dotlottie-web)
-	 * all stay in place, so finishing it means uncommenting this entry. Nothing
-	 * ships meanwhile: the build derives its entry points from this array, so an
-	 * absent item is an unbuilt page, not a broken link. The assets it would need
-	 * are archived at _demo-archive/ — snowman.png and the two 4803px-wide
-	 * snow-land strips.
+	 * Held back — unfinished. Uncomment to ship it; nothing else is needed.
 	 *
 	 * { slug: "lottie-scrolltrigger", title: "Lottie + ScrollTrigger", tags: ["gsap", "ScrollTrigger", "lottie"], category: "sites" },
 	 */

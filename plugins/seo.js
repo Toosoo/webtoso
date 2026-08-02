@@ -10,11 +10,8 @@ import { site } from "../src/site.js";
 
 /**
  * Injects per-page, per-locale SEO metadata into every HTML entry and emits
- * sitemap.xml + robots.txt at build.
- *
- * Everything derives from `lessons.js` and `i18n.js`, so publishing a lesson
- * needs no SEO work — add the entry and the metadata, the hreflang pairs and the
- * sitemap rows all follow.
+ * sitemap.xml + robots.txt at build. Everything derives from `content/` and
+ * `i18n.js`, so publishing a lesson needs no SEO work.
  */
 
 const escapeHtml = (value) =>
@@ -35,13 +32,7 @@ const localePath = (locale, path) => `/${locale}${path}`;
 /** `"gsap"` → `"/gsap/"`. The course index, one segment above its lessons. */
 const sectionPath = (sectionId) => `/${sectionId}/`;
 
-/**
- * The section whose index page a path points at, or null.
- *
- * `itemFromPath` already returns null here — `/ar/gsap/index.html` has no slug
- * to match — so a course index needs its own check: exactly one segment after
- * the locale, and it has to name a real section.
- */
+/** The section whose index page a path points at, or null. */
 function sectionFromPath(pathname) {
 	const parts = pathname
 		.split("/")
@@ -52,12 +43,7 @@ function sectionFromPath(pathname) {
 	return sections.find((section) => section.id === rest[0]) ?? null;
 }
 
-/**
- * The same page in every locale, plus x-default.
- *
- * x-default points at English as the more broadly readable fallback for a
- * visitor whose language we do not publish.
- */
+/** The same page in every locale, plus x-default pointing at English. */
 const alternateTags = (path) => [
 	...LOCALES.map((locale) => ({
 		tag: "link",
@@ -79,16 +65,10 @@ const alternateTags = (path) => [
 
 function lessonMeta(item, locale) {
 	const copy = t[locale];
-	/** A section may override the noun: the courses teach lessons, the lab shows demos. */
 	const sectionCopy = copy.sections[item.section];
 
 	return {
 		title: `${item.title} · ${sectionCopy.itemWord ?? copy.lessonWord} ${pad(item.number)} — ${sectionCopy.label}`,
-		/**
-		 * The template is per-section (decision 22). It used to be one global
-		 * string that named three.js, which put "lesson N of a three.js course"
-		 * on every GSAP lesson and every lab demo — 60 of 82 pages.
-		 */
 		description:
 			item.description?.[locale] ??
 			fill(sectionCopy.itemDescription, {
@@ -130,14 +110,7 @@ const providerFor = (locale) => ({
 	url: abs(localePath(locale, "/")),
 });
 
-/**
- * The root page lists the courses rather than the lessons.
- *
- * It is a CollectionPage whose parts are the three Courses, each pointing at
- * its own index — which is where the full `hasPart` lesson list lives. Before
- * the section indexes existed this was a single Course containing all 40 items,
- * which described the site as one curriculum it is not.
- */
+/** A CollectionPage whose parts are the three Courses. */
 function homeJsonLd(locale) {
 	const copy = t[locale];
 
@@ -237,12 +210,7 @@ function tagsFor(meta, jsonLd, locale) {
 	return tags.map((tag) => ({ ...tag, injectTo: "head" }));
 }
 
-/**
- * The lesson chrome (home button + lesson label) is injected here rather than
- * written into every lesson's `index.html`, so anything that has to appear on
- * every lesson page is a one-line change in this file instead of one edit per
- * lesson. It reads its own locale from `location.pathname` at runtime.
- */
+/** Injected here so every lesson page gets it from one place. */
 const chromeTag = () => ({
 	tag: "script",
 	attrs: { type: "module", src: "/src/lessonChrome.js" },
@@ -258,11 +226,7 @@ export function seo() {
 			handler(html, ctx) {
 				const locale = localeFromPath(ctx.path);
 
-				/**
-				 * Three page shapes: a lesson, a course index, or the root landing
-				 * page. Only lesson pages get the chrome bar — the other two are
-				 * hub pages that render their own navigation.
-				 */
+				/** Three page shapes: a lesson, a course index, or the landing page. */
 				const item = itemFromPath(ctx.path);
 				const section = item ? null : sectionFromPath(ctx.path);
 
@@ -298,11 +262,7 @@ export function seo() {
 				...allItems.map((item) => item.url),
 			];
 
-			/**
-			 * One sitemap covering both locales, with each entry declaring its
-			 * alternates — the shape Google asks for when the same page exists in
-			 * more than one language.
-			 */
+			/** One sitemap covering both locales, each entry declaring its alternates. */
 			const entries = LOCALES.flatMap((locale) =>
 				paths.map((path) => ({
 					loc: abs(localePath(locale, path)),

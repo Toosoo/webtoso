@@ -6,35 +6,11 @@ import { fill, localeFromPath, t } from "./i18n.js";
  *
  *     ⌂ │ ‹  07 · KEYFRAMES  ›
  *
- * Left to right: up to the lesson's own course index, then back and forward
- * through that course. It is the only navigation a lesson page has — decision 13
- * leaves these pages with no prose and no video, so moving between them is most
- * of what the bar is for.
- *
- * No language switcher, deliberately (decision 23). It lives in `TopBar` on the
- * hub pages only: a lesson body is English in both locales by decision 6, so
- * switching locale here changes the direction of this bar and nothing else the
- * reader can see. The `alternate` tags `seo.js` emits still pair the two URLs
- * for search engines — that never depended on a control being on the page.
- *
- * Loaded from each lesson's `index.html`, never from `main.js`, so the lesson
- * source stays pure teaching material. Styles are self-contained rather than
- * Tailwind classes so this module can't be broken by changes to global-style.css
- * — which also means it renders identically on the two React lessons, the only
- * ones that don't load that file at all.
+ * Styles are self-contained rather than Tailwind, so it renders identically on
+ * the two React lessons, which load no stylesheet at all.
  */
 
-/*
- * `highlight` on `canvas`, the same dark-on-bright pairing `SectionHeader` uses
- * and the only bright fill in the palette — which is what this bar wants to be,
- * since it floats over 44 different lesson backgrounds and cannot rely on any
- * of them for contrast. Measured in hub.css: canvas on highlight is 11.3:1.
- *
- * These values are copied from that file's `@theme` block by hand, the same way
- * `public/404.html` copies them, and for the same reason: this module is
- * self-contained so that it renders identically on the two React lessons, which
- * load no stylesheet at all. Nothing will warn you if the theme moves.
- */
+/* Colours are hand-copied from hub.css `@theme` — nothing syncs them. */
 const CSS = `
 .lesson-chrome {
 	position: fixed;
@@ -48,11 +24,7 @@ const CSS = `
 	   scrollbar — and 12 of these lessons are scroll-driven. */
 	max-width: calc(100% - 20px);
 	background: #fcba28;
-	/*
-	 * SectionHeader drops its border because the fill already defines the edge,
-	 * but that holds only against a known background. Over a lesson canvas the
-	 * bar can land on anything, so it keeps a rim and a shadow.
-	 */
+	/* Rim and shadow: the bar can land on any lesson background. */
 	border: 1px solid rgb(15 13 14 / 0.18);
 	box-shadow: 0 6px 20px rgb(0 0 0 / 0.28);
 	color: #0f0d0e;
@@ -78,12 +50,6 @@ const CSS = `
 	transition: background-color 0.15s, color 0.15s;
 }
 
-/*
- * Hover inverts rather than tints. A one-hue bar has no second colour to move
- * to — the old red hover would now sit accent-on-highlight, two bright warms at
- * roughly 1.5:1 — so the two values swap instead, which stays at 11.3:1 both
- * ways round.
- */
 a.lesson-chrome__home:hover,
 a.lesson-chrome__step:hover {
 	background: #0f0d0e;
@@ -109,11 +75,7 @@ a.lesson-chrome__step:hover {
 	color: rgb(15 13 14 / 0.35);
 }
 
-/*
- * "Previous" points towards the start of the line, whichever way the line runs.
- * The bar declares its own dir, so its flex row already reverses under /ar —
- * the glyphs have to follow it or they contradict the order they sit in.
- */
+/* The bar's flex row reverses under /ar, so the glyphs have to follow. */
 .lesson-chrome[dir="rtl"] .lesson-chrome__chevron {
 	transform: scaleX(-1);
 }
@@ -138,22 +100,12 @@ a.lesson-chrome__step:hover {
 	white-space: nowrap;
 }
 
-/*
- * The one part allowed to shrink. The bar is centred with a transform, so an
- * over-wide pill would hang off both edges and scroll the page sideways;
- * "ScrollTrigger + MotionPath" plus both arrows and a locale label is already
- * close to that on a phone.
- */
+/* The one part allowed to shrink — an over-wide bar scrolls the page sideways. */
 .lesson-chrome__title {
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
 
-/*
- * The number used to be picked out in the accent. On a single-hue bar that is
- * no longer available, so the hierarchy moves to weight: the number is heavier
- * than the title beside it rather than a different colour.
- */
 .lesson-chrome__number {
 	font-weight: 700;
 	font-variant-numeric: tabular-nums;
@@ -186,11 +138,7 @@ const chevron = (d) => `<svg class="lesson-chrome__chevron" viewBox="0 0 16 16"
 const PREV_ICON = chevron("M9.8 3.6 5.4 8l4.4 4.4");
 const NEXT_ICON = chevron("M6.2 3.6 10.6 8l-4.4 4.4");
 
-/**
- * Attribute-safe. Item titles are author-written and reach `aria-label` and
- * `title` now, not just a text node — and three of them carry an `&`
- * ("Debug (GUI & stats)").
- */
+/** Attribute-safe: titles reach `aria-label`, and some carry an `&`. */
 const esc = (value) =>
 	String(value)
 		.replace(/&/g, "&amp;")
@@ -198,17 +146,7 @@ const esc = (value) =>
 		.replace(/>/g, "&gt;")
 		.replace(/"/g, "&quot;");
 
-/**
- * The items either side of this one, within its own section.
- *
- * `number` is the 1-based position inside the section, so the item itself sits
- * at `number - 1` and its neighbours are one step out from there. Order comes
- * from the manifest array and nowhere else (decision 8), so reordering a course
- * reorders these links with it.
- *
- * Navigation stops at the section boundary on purpose: the step after the last
- * GSAP lesson is the end of that course, not the first lab demo.
- */
+/** Neighbours within this item's own section — navigation stops at the boundary. */
 function neighbours(item) {
 	const siblings = allItems.filter(
 		(sibling) => sibling.section === item.section,
@@ -220,10 +158,7 @@ function neighbours(item) {
 	};
 }
 
-/**
- * One arrow. A missing neighbour still renders — greyed, and hidden from screen
- * readers — so the bar keeps the same shape from the first item to the last.
- */
+/** A missing neighbour still renders, greyed, so the bar keeps its shape. */
 function step(item, locale, icon, template) {
 	if (!item) {
 		return `<span class="lesson-chrome__step lesson-chrome__step--off" aria-hidden="true">${icon}</span>`;

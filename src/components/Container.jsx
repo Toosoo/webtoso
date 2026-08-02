@@ -1,6 +1,5 @@
 import { cn } from "../lib/cn.js";
 
-/** Page gutter + max width. Every full-bleed band uses this to line up. */
 export function Container({ className, children }) {
 	return (
 		<div

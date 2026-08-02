@@ -1,12 +1,6 @@
 /**
- * The three.js course, in course order.
- *
- * Array order IS the course order: display numbers, section ranges and counts
- * are all derived from it, so nothing here is numbered by hand. URLs are
- * derived too — see `lessonUrl()` in `./index.js`.
- *
- * `category` must match an id in `i18n.categories`. Read by `vite.config.js`
- * to build entry points, so every entry needs a real
+ * Array order is the course order; numbers and URLs derive from it. `category`
+ * must match an id in `i18n.categories`, and every entry needs a real
  * `threejs/<slug>/index.html` on disk.
  */
 export const threejs = [

@@ -5,13 +5,6 @@ import { Label } from "../components/Label.jsx";
 import { TopBar } from "../components/TopBar.jsx";
 import { hub } from "../hubData.js";
 
-/**
- * The root page, `/<locale>/`.
- *
- * Deliberately not a lesson grid (decision 16). Its job is to introduce the
- * site and hand the reader to one of the three course indexes, which are the
- * pages that carry the topic-level prose and the per-course JSON-LD.
- */
 export function Landing() {
 	return (
 		<>
