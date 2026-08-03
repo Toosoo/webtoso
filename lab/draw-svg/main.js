@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     smooth: 2,
   });
 
-  gsap.from("path",{
+  gsap.from("#smooth-content svg path",{
     drawSVG:0,
     ease:'none',
     scrollTrigger:{
