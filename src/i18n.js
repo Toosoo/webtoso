@@ -171,6 +171,9 @@ export const t = {
 		prevAriaLabel: "السابق: {title}",
 		nextAriaLabel: "التالي: {title}",
 
+		/** The bar's label only — the panel it opens is untranslated by design. */
+		codeAriaLabel: "عرض كود الدرس",
+
 		lessonWord: "الدرس",
 	},
 
@@ -313,6 +316,8 @@ export const t = {
 
 		prevAriaLabel: "Previous: {title}",
 		nextAriaLabel: "Next: {title}",
+
+		codeAriaLabel: "View lesson source",
 
 		lessonWord: "Lesson",
 	},

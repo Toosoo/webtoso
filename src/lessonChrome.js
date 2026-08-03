@@ -17,7 +17,8 @@ const CSS = `
 	top: 14px;
 	left: 50%;
 	transform: translateX(-50%);
-	z-index: 1000;
+	/* lil-gui docks itself at 1001, and threejs/debug loads it. */
+	z-index: 1002;
 	display: inline-flex;
 	align-items: stretch;
 	/* Percent, not vw: the bar is fixed, so 100% is the viewport *without* the
@@ -40,7 +41,8 @@ const CSS = `
 }
 
 .lesson-chrome__home,
-.lesson-chrome__step {
+.lesson-chrome__step,
+.lesson-chrome__code {
 	display: inline-flex;
 	flex: none;
 	align-items: center;
@@ -51,19 +53,31 @@ const CSS = `
 }
 
 a.lesson-chrome__home:hover,
-a.lesson-chrome__step:hover {
+a.lesson-chrome__step:hover,
+.lesson-chrome__code:hover {
 	background: #0f0d0e;
 	color: #fcba28;
 }
 
 .lesson-chrome__home:focus-visible,
-.lesson-chrome__step:focus-visible {
+.lesson-chrome__step:focus-visible,
+.lesson-chrome__code:focus-visible {
 	outline: 2px solid #0f0d0e;
 	outline-offset: -2px;
 }
 
 .lesson-chrome__home {
 	width: 34px;
+}
+
+/* A <button> in a bar of links: it inherits none of the reset the others get. */
+.lesson-chrome__code {
+	width: 34px;
+	padding: 0;
+	border: 0;
+	background: none;
+	cursor: pointer;
+	font: inherit;
 }
 
 .lesson-chrome__step {
@@ -137,6 +151,13 @@ const chevron = (d) => `<svg class="lesson-chrome__chevron" viewBox="0 0 16 16"
 
 const PREV_ICON = chevron("M9.8 3.6 5.4 8l4.4 4.4");
 const NEXT_ICON = chevron("M6.2 3.6 10.6 8l-4.4 4.4");
+
+/** Not mirrored under /ar: `</>` reads left-to-right in every locale. */
+const CODE_ICON = `<svg viewBox="0 0 16 16" width="15" height="15" fill="none"
+	stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+	stroke-linejoin="round" aria-hidden="true">
+	<path d="M6 3.4 2.2 8 6 12.6M10 3.4 13.8 8 10 12.6" />
+</svg>`;
 
 /** Attribute-safe: titles reach `aria-label`, and some carry an `&`. */
 const esc = (value) =>
@@ -212,7 +233,20 @@ function mount() {
 			<span class="lesson-chrome__title">${esc(lesson.title)}</span>
 		</span>
 		${step(next, locale, NEXT_ICON, copy.nextAriaLabel)}
+		<span class="lesson-chrome__divider"></span>
+		<button type="button" class="lesson-chrome__code"
+			aria-label="${esc(copy.codeAriaLabel)}" title="${esc(copy.codeAriaLabel)}">
+			${CODE_ICON}
+		</button>
 	`;
+
+	/** The panel and every lesson source stay unfetched until this fires. */
+	bar
+		.querySelector(".lesson-chrome__code")
+		.addEventListener("click", async (event) => {
+			const { openCode } = await import("./lessonCode.js");
+			openCode(lesson, event.currentTarget);
+		});
 
 	document.body.append(bar);
 }
