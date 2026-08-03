@@ -6,9 +6,33 @@ import { defineConfig } from "vite";
 import { prerender } from "./plugins/prerender.js";
 import { seo } from "./plugins/seo.js";
 import { sections } from "./src/content/index.js";
-import { LOCALES, t } from "./src/i18n.js";
+import { DEFAULT_LOCALE, LOCALES, t } from "./src/i18n.js";
 
 const root = import.meta.dirname;
+
+
+function rootRedirect() {
+	const redirect = (req, res, next) => {
+		if (req.url === "/" || req.url === "/index.html") {
+			res.writeHead(302, { Location: `/${DEFAULT_LOCALE}/` });
+			res.end();
+			return;
+		}
+		next();
+	};
+
+	/* Block bodies: a value returned from these hooks is treated as a post-hook
+	   and called with no arguments, which crashes the server on startup. */
+	return {
+		name: "root-redirect",
+		configureServer(server) {
+			server.middlewares.use(redirect);
+		},
+		configurePreviewServer(server) {
+			server.middlewares.use(redirect);
+		},
+	};
+}
 
 /**
  * Locale trees are generated, gitignored, and live in the project root because
@@ -72,7 +96,7 @@ function generateLocaleEntries() {
 }
 
 export default defineConfig({
-	plugins: [react(), tailwindcss(), seo(), prerender()],
+	plugins: [react(), tailwindcss(), rootRedirect(), seo(), prerender()],
 	server: {
 		port: 3000,
 		host: true,
