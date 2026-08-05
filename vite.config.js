@@ -86,6 +86,8 @@ function generateLocaleEntries() {
 }
 
 export default defineConfig({
+	/** No SPA fallback — a dead URL must 404 in dev exactly as it does on Vercel. */
+	appType: "mpa",
 	plugins: [react(), tailwindcss(), rootRedirect(), seo(), prerender()],
 	server: {
 		port: 3000,
