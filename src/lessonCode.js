@@ -20,7 +20,7 @@ const COPY = {
 /**
  * Root-anchored, so the generated `ar/` and `en/` trees never match. Non-eager,
  * so each file becomes its own chunk. `?raw` reads the file as authored, before
- * `absolutise()` and the SEO/chrome injection rewrite the copies Vite builds.
+ * the SEO and chrome injection rewrite the page Vite builds.
  */
 const SOURCES = import.meta.glob(
 	[

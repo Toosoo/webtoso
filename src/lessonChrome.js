@@ -1,5 +1,11 @@
 import { allItems, itemFromPath } from "./content/index.js";
-import { fill, localeFromPath, t } from "./i18n.js";
+import {
+	DEFAULT_LOCALE,
+	fill,
+	LOCALE_STORAGE_KEY,
+	LOCALES,
+	t,
+} from "./i18n.js";
 
 /**
  * Small fixed bar at the top of every lesson page.
@@ -167,6 +173,17 @@ const esc = (value) =>
 		.replace(/>/g, "&gt;")
 		.replace(/"/g, "&quot;");
 
+/** Whichever locale the reader last used on a hub. Storage throws when the
+    browser blocks it, and a cold arrival from YouTube has none. */
+function storedLocale() {
+	try {
+		const stored = localStorage.getItem(LOCALE_STORAGE_KEY);
+		if (LOCALES.includes(stored)) return stored;
+	} catch {}
+
+	return DEFAULT_LOCALE;
+}
+
 /** Neighbours within this item's own section — navigation stops at the boundary. */
 function neighbours(item) {
 	const siblings = allItems.filter(
@@ -180,19 +197,19 @@ function neighbours(item) {
 }
 
 /** A missing neighbour still renders, greyed, so the bar keeps its shape. */
-function step(item, locale, icon, template) {
+function step(item, icon, template) {
 	if (!item) {
 		return `<span class="lesson-chrome__step lesson-chrome__step--off" aria-hidden="true">${icon}</span>`;
 	}
 
 	const label = esc(fill(template, { title: item.title }));
 
-	return `<a class="lesson-chrome__step" href="/${locale}${item.url}"
+	return `<a class="lesson-chrome__step" href="${item.url}"
 		aria-label="${label}" title="${label}">${icon}</a>`;
 }
 
 function mount() {
-	const locale = localeFromPath(location.pathname);
+	const locale = storedLocale();
 	const copy = t[locale];
 	const lesson = itemFromPath(location.pathname);
 
@@ -216,23 +233,24 @@ function mount() {
 	bar.className = "lesson-chrome";
 	bar.setAttribute("aria-label", copy.lessonNavAriaLabel);
 	/**
-	 * The document stays LTR on lesson pages so the demo isn't flipped, so the
-	 * bar has to declare its own direction — it is the only translated text on
-	 * the page.
+	 * The document stays LTR and English on lesson pages so the demo isn't
+	 * flipped, so the bar has to declare its own direction and language — it is
+	 * the only translated text on the page.
 	 */
 	bar.dir = copy.dir;
+	bar.lang = locale;
 	bar.innerHTML = `
 		<a class="lesson-chrome__home" href="/${locale}/${lesson.section}/" aria-label="${esc(copy.homeAriaLabel)}">
 			${HOME_ICON}
 		</a>
 		<span class="lesson-chrome__divider"></span>
-		${step(prev, locale, PREV_ICON, copy.prevAriaLabel)}
+		${step(prev, PREV_ICON, copy.prevAriaLabel)}
 		<span class="lesson-chrome__label">
 			<span class="lesson-chrome__number">${number}</span>
 			<span class="lesson-chrome__dot" aria-hidden="true">·</span>
 			<span class="lesson-chrome__title">${esc(lesson.title)}</span>
 		</span>
-		${step(next, locale, NEXT_ICON, copy.nextAriaLabel)}
+		${step(next, NEXT_ICON, copy.nextAriaLabel)}
 		<span class="lesson-chrome__divider"></span>
 		<button type="button" class="lesson-chrome__code"
 			aria-label="${esc(copy.codeAriaLabel)}" title="${esc(copy.codeAriaLabel)}">

@@ -63,20 +63,20 @@ const alternateTags = (path) => [
 	},
 ];
 
-function lessonMeta(item, locale) {
-	const copy = t[locale];
+/** A lesson at `/<section>/<slug>/` — one URL, English meta, no alternates. */
+function lessonMeta(item) {
+	const copy = t.en;
 	const sectionCopy = copy.sections[item.section];
 
 	return {
 		title: `${item.title} · ${sectionCopy.itemWord ?? copy.lessonWord} ${pad(item.number)} — ${sectionCopy.label}`,
 		description:
-			item.description?.[locale] ??
+			item.description?.en ??
 			fill(sectionCopy.itemDescription, {
 				title: item.title,
 				n: item.number,
 			}),
-		canonical: abs(localePath(locale, item.url)),
-		path: item.url,
+		canonical: abs(item.url),
 	};
 }
 
@@ -152,7 +152,7 @@ function sectionJsonLd(sectionId, locale) {
 			"@type": "LearningResource",
 			position: item.number,
 			name: item.title,
-			url: abs(localePath(locale, item.url)),
+			url: abs(item.url),
 			learningResourceType: "Interactive lesson",
 		})),
 	};
@@ -164,7 +164,7 @@ function tagsFor(meta, jsonLd, locale) {
 	const tags = [
 		{ tag: "meta", attrs: { name: "description", content: meta.description } },
 		{ tag: "link", attrs: { rel: "canonical", href: meta.canonical } },
-		...alternateTags(meta.path),
+		...(meta.path ? alternateTags(meta.path) : []),
 		{ tag: "meta", attrs: { property: "og:type", content: "website" } },
 		{
 			tag: "meta",
@@ -233,7 +233,7 @@ export function seo() {
 				let meta;
 				let jsonLd;
 				if (item) {
-					meta = lessonMeta(item, locale);
+					meta = lessonMeta(item);
 					jsonLd = null;
 				} else if (section) {
 					meta = sectionMeta(section.id, locale);
@@ -249,32 +249,34 @@ export function seo() {
 						`<title>${escapeHtml(meta.title)}</title>`,
 					),
 					tags: item
-						? [...tagsFor(meta, jsonLd, locale), chromeTag()]
+						? [...tagsFor(meta, jsonLd, "en"), chromeTag()]
 						: tagsFor(meta, jsonLd, locale),
 				};
 			},
 		},
 
 		generateBundle() {
-			const paths = [
+			const hubPaths = [
 				"/",
 				...sections.map((section) => sectionPath(section.id)),
-				...allItems.map((item) => item.url),
 			];
 
-			/** One sitemap covering both locales, each entry declaring its alternates. */
-			const entries = LOCALES.flatMap((locale) =>
-				paths.map((path) => ({
-					loc: abs(localePath(locale, path)),
-					alternates: [
-						...LOCALES.map((alt) => ({
-							hreflang: alt,
-							href: abs(localePath(alt, path)),
-						})),
-						{ hreflang: "x-default", href: abs(localePath("en", path)) },
-					],
-				})),
-			);
+			/** Hub paths exist once per locale and declare alternates; lessons once. */
+			const entries = [
+				...LOCALES.flatMap((locale) =>
+					hubPaths.map((path) => ({
+						loc: abs(localePath(locale, path)),
+						alternates: [
+							...LOCALES.map((alt) => ({
+								hreflang: alt,
+								href: abs(localePath(alt, path)),
+							})),
+							{ hreflang: "x-default", href: abs(localePath("en", path)) },
+						],
+					})),
+				),
+				...allItems.map((item) => ({ loc: abs(item.url), alternates: [] })),
+			];
 
 			this.emitFile({
 				type: "asset",
@@ -282,16 +284,16 @@ export function seo() {
 				source: `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${entries
-	.map(
-		(entry) => `\t<url>
-\t\t<loc>${escapeHtml(entry.loc)}</loc>
-${entry.alternates
-	.map(
-		(alt) =>
-			`\t\t<xhtml:link rel="alternate" hreflang="${alt.hreflang}" href="${escapeHtml(alt.href)}" />`,
-	)
-	.join("\n")}
-\t</url>`,
+	.map((entry) =>
+		[
+			"\t<url>",
+			`\t\t<loc>${escapeHtml(entry.loc)}</loc>`,
+			...entry.alternates.map(
+				(alt) =>
+					`\t\t<xhtml:link rel="alternate" hreflang="${alt.hreflang}" href="${escapeHtml(alt.href)}" />`,
+			),
+			"\t</url>",
+		].join("\n"),
 	)
 	.join("\n")}
 </urlset>

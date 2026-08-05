@@ -1,5 +1,5 @@
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
-import { dirname, relative, resolve, sep } from "node:path";
+import { mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { dirname, resolve } from "node:path";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
@@ -42,125 +42,51 @@ const write = (file, contents) => {
 	writeFileSync(file, contents);
 };
 
-/** Lesson pages stay `dir="ltr"` even in Arabic — flipping breaks their layout. */
-const setLang = (html, locale, { rtlDocument }) =>
+const setLang = (html, locale) =>
 	html.replace(
 		/<html[^>]*>/,
-		`<html lang="${t[locale].htmlLang}" dir="${rtlDocument ? t[locale].dir : "ltr"}">`,
+		`<html lang="${t[locale].htmlLang}" dir="${t[locale].dir}">`,
 	);
 
-/**
- * Generated pages don't sit next to their `main.js`, so relative refs become
- * root-absolute. Must catch BOTH `./x` and bare `x` — matching only `./x` once
- * shipped 12 lessons with a 404 stylesheet and a green build.
- */
-const absolutise = (html, sectionId, slug) =>
-	html.replace(
-		/(src|href)="(?!https?:|\/\/|\/|#|data:|mailto:)(?:\.\/)?([^"]+)"/g,
-		(_match, attr, path) => `${attr}="/${sectionId}/${slug}/${path}"`,
-	);
-
-const lessonOut = (locale, sectionId, slug) =>
-	resolve(root, locale, sectionId, slug, "index.html");
-
-/** Both locale copies of one lesson page. The dev watcher reuses this, so the
-    transform can never drift between the build and a live edit. */
-function writeLessonPage(sectionId, slug) {
-	const source = readFileSync(
-		resolve(root, sectionId, slug, "index.html"),
-		"utf8",
-	);
-
-	for (const locale of LOCALES) {
-		write(
-			lessonOut(locale, sectionId, slug),
-			absolutise(
-				setLang(source, locale, { rtlDocument: false }),
-				sectionId,
-				slug,
-			),
-		);
-	}
-}
-
+/** Only the 8 hub pages are generated; lessons build in place, one copy each. */
 function generateLocaleEntries() {
+	/* Wiped first — lesson snapshots left by an older build would otherwise
+	   keep dev serving URLs that no longer exist. */
+	for (const locale of LOCALES) {
+		rmSync(resolve(root, locale), { recursive: true, force: true });
+	}
+
 	const input = {};
 	const hub = readFileSync(resolve(root, "index.html"), "utf8");
 
 	for (const locale of LOCALES) {
 		const hubOut = resolve(root, locale, "index.html");
-		write(hubOut, setLang(hub, locale, { rtlDocument: true }));
+		write(hubOut, setLang(hub, locale));
 		input[`hub-${locale}`] = hubOut;
 
 		for (const section of sections) {
 			const indexOut = resolve(root, locale, section.id, "index.html");
-			write(indexOut, setLang(hub, locale, { rtlDocument: true }));
+			write(indexOut, setLang(hub, locale));
 			input[`${locale}-${section.id}-index`] = indexOut;
-
-			for (const item of section.items) {
-				input[`${locale}-${section.id}-${item.slug}`] = lessonOut(
-					locale,
-					section.id,
-					item.slug,
-				);
-			}
 		}
 	}
 
 	for (const section of sections) {
 		for (const item of section.items) {
-			writeLessonPage(section.id, item.slug);
+			input[`${section.id}-${item.slug}`] = resolve(
+				root,
+				section.id,
+				item.slug,
+				"index.html",
+			);
 		}
 	}
 
 	return input;
 }
 
-/**
- * `generateLocaleEntries()` runs once, when this config loads, so dev serves a
- * snapshot of every lesson's `index.html`. Editing one changed nothing until the
- * server was restarted — and for the seven lessons whose script is inline, that
- * is the entire lesson. `main.js` and `style.css` were never affected: the
- * generated page points at their real paths.
- */
-function watchLessonPages() {
-	const sectionIds = new Set(sections.map((section) => section.id));
-
-	return {
-		name: "watch-lesson-pages",
-		configureServer(server) {
-			server.watcher.on("change", (file) => {
-				/* Three segments, so the generated `ar/…` and `en/…` copies never
-				   match — rewriting on those would feed the watcher its own writes. */
-				const parts = relative(root, file).split(sep);
-
-				if (parts.length === 1 && parts[0] === "index.html") {
-					generateLocaleEntries();
-				} else if (
-					parts.length === 3 &&
-					sectionIds.has(parts[0]) &&
-					parts[2] === "index.html"
-				) {
-					writeLessonPage(parts[0], parts[1]);
-				} else {
-					return;
-				}
-
-				(server.hot ?? server.ws).send({ type: "full-reload", path: "*" });
-			});
-		},
-	};
-}
-
 export default defineConfig({
-	plugins: [
-		react(),
-		tailwindcss(),
-		rootRedirect(),
-		watchLessonPages(),
-		seo(),
-		prerender(),
-	],
+	plugins: [react(), tailwindcss(), rootRedirect(), seo(), prerender()],
 	server: {
 		port: 3000,
 		host: true,

@@ -15,13 +15,14 @@ pnpm dev | build | preview | lint | format
 sitemap and chrome-bar links all derive from it. Adding a lesson = one manifest
 entry + a folder. Nothing is listed by hand.
 
-44 items → `(1 home + 3 indexes + 44 items) × 2 locales` = **96 pages**.
+44 items → `(1 home + 3 indexes) × 2 locales + 44 items` = **52 pages**.
+Hub pages are per-locale; lessons are built once, at `/<section>/<slug>/`.
 
 Build: `vite.config.js` generates the `ar/` + `en/` trees → `plugins/seo.js`
 injects meta and emits sitemap/robots → `plugins/prerender.js` renders the 8 hub
 pages into `<div id="root">` → `src/main.jsx` hydrates.
 
-The 8 hub pages hold all the site's prose. The 88 lesson pages have none, by
+The 8 hub pages hold all the site's prose. The 44 lesson pages have none, by
 design.
 
 ## Never
@@ -40,8 +41,6 @@ Each of these produced a **green build and a broken site**.
   silently killed scrolling on six lessons.
 - **`hubData.js` reads `location` at module scope**, so `prerender.js` must call
   `moduleGraph.invalidateAll()` between pages, or all 8 render in one locale.
-- **`absolutise()` must catch bare `href="x"`, not just `./x`** — a bare one
-  resolves against a directory holding only `index.html`.
 - **`pnpm lint` passing ≠ build passing.** A dangling `/**` once swallowed an
   `export`: valid syntax, clean lint, failed build. Always run `pnpm build`.
 - **`dist/assets/` mixes two things** — flat files are hashed build output,
@@ -57,8 +56,8 @@ Each of these produced a **green build and a broken site**.
 
 ```bash
 pnpm lint && pnpm build
-find dist -name index.html | wc -l     # 96
-grep -c '<loc>' dist/sitemap.xml       # 96
+find dist -name index.html | wc -l     # 52
+grep -c '<loc>' dist/sitemap.xml       # 52
 
 # every hub page must have real text — 0 means prerender silently broke
 for loc in ar en; do for p in "" threejs/ gsap/ lab/; do
