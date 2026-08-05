@@ -1,5 +1,5 @@
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
-import { dirname, resolve } from "node:path";
+import { dirname, relative, resolve, sep } from "node:path";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
@@ -9,7 +9,6 @@ import { sections } from "./src/content/index.js";
 import { DEFAULT_LOCALE, LOCALES, t } from "./src/i18n.js";
 
 const root = import.meta.dirname;
-
 
 function rootRedirect() {
 	const redirect = (req, res, next) => {
@@ -61,6 +60,29 @@ const absolutise = (html, sectionId, slug) =>
 		(_match, attr, path) => `${attr}="/${sectionId}/${slug}/${path}"`,
 	);
 
+const lessonOut = (locale, sectionId, slug) =>
+	resolve(root, locale, sectionId, slug, "index.html");
+
+/** Both locale copies of one lesson page. The dev watcher reuses this, so the
+    transform can never drift between the build and a live edit. */
+function writeLessonPage(sectionId, slug) {
+	const source = readFileSync(
+		resolve(root, sectionId, slug, "index.html"),
+		"utf8",
+	);
+
+	for (const locale of LOCALES) {
+		write(
+			lessonOut(locale, sectionId, slug),
+			absolutise(
+				setLang(source, locale, { rtlDocument: false }),
+				sectionId,
+				slug,
+			),
+		);
+	}
+}
+
 function generateLocaleEntries() {
 	const input = {};
 	const hub = readFileSync(resolve(root, "index.html"), "utf8");
@@ -76,27 +98,69 @@ function generateLocaleEntries() {
 			input[`${locale}-${section.id}-index`] = indexOut;
 
 			for (const item of section.items) {
-				const from = resolve(root, section.id, item.slug, "index.html");
-				const source = readFileSync(from, "utf8");
-				const out = resolve(root, locale, section.id, item.slug, "index.html");
-				write(
-					out,
-					absolutise(
-						setLang(source, locale, { rtlDocument: false }),
-						section.id,
-						item.slug,
-					),
+				input[`${locale}-${section.id}-${item.slug}`] = lessonOut(
+					locale,
+					section.id,
+					item.slug,
 				);
-				input[`${locale}-${section.id}-${item.slug}`] = out;
 			}
+		}
+	}
+
+	for (const section of sections) {
+		for (const item of section.items) {
+			writeLessonPage(section.id, item.slug);
 		}
 	}
 
 	return input;
 }
 
+/**
+ * `generateLocaleEntries()` runs once, when this config loads, so dev serves a
+ * snapshot of every lesson's `index.html`. Editing one changed nothing until the
+ * server was restarted — and for the seven lessons whose script is inline, that
+ * is the entire lesson. `main.js` and `style.css` were never affected: the
+ * generated page points at their real paths.
+ */
+function watchLessonPages() {
+	const sectionIds = new Set(sections.map((section) => section.id));
+
+	return {
+		name: "watch-lesson-pages",
+		configureServer(server) {
+			server.watcher.on("change", (file) => {
+				/* Three segments, so the generated `ar/…` and `en/…` copies never
+				   match — rewriting on those would feed the watcher its own writes. */
+				const parts = relative(root, file).split(sep);
+
+				if (parts.length === 1 && parts[0] === "index.html") {
+					generateLocaleEntries();
+				} else if (
+					parts.length === 3 &&
+					sectionIds.has(parts[0]) &&
+					parts[2] === "index.html"
+				) {
+					writeLessonPage(parts[0], parts[1]);
+				} else {
+					return;
+				}
+
+				(server.hot ?? server.ws).send({ type: "full-reload", path: "*" });
+			});
+		},
+	};
+}
+
 export default defineConfig({
-	plugins: [react(), tailwindcss(), rootRedirect(), seo(), prerender()],
+	plugins: [
+		react(),
+		tailwindcss(),
+		rootRedirect(),
+		watchLessonPages(),
+		seo(),
+		prerender(),
+	],
 	server: {
 		port: 3000,
 		host: true,
