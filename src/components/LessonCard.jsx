@@ -10,7 +10,7 @@ import { Tag } from "./Tag.jsx";
 /** `media` fills the empty area on the card layout — pass a thumbnail later. */
 export function LessonCard({ lesson, media }) {
 	const watchLabel = fill(hub.lessonCard.watchLabel, { title: lesson.title });
-	const href = `/${hub.locale}${lesson.url}`;
+	const href = lesson.url;
 	const itemWord = sectionById(lesson.section)?.itemWord ?? hub.lessonWord;
 
 	return (

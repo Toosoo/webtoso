@@ -11,6 +11,9 @@ export const LOCALES = ["ar", "en"];
 /** Used for the root redirect and as the fallback when a path has no prefix. */
 export const DEFAULT_LOCALE = "ar";
 
+/** Lesson URLs carry no locale: hub pages write this, the chrome bar reads it. */
+export const LOCALE_STORAGE_KEY = "webtoso:locale";
+
 export const t = {
 	ar: {
 		dir: "rtl",
