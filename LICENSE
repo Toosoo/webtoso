@@ -1,0 +1,20 @@
+Copyright © 2026 Ahmed Attia (webtoso)
+
+This repository is the companion to the webtoso YouTube channel
+(https://www.youtube.com/@webtoso). The lesson code is published so you can
+read it, run it, and experiment with it while following the courses.
+
+You may:
+
+- clone the repository and run the site locally
+- study the lessons and demos, and reuse techniques and snippets from them
+  in your own projects, commercial or not
+
+You may not:
+
+- republish the courses, lessons, demos or site content, in whole or in
+  part, as a course, tutorial, website or video of your own
+- redistribute this repository or its content under your own name
+
+Third-party dependencies (three.js, GSAP, React and the rest) keep their own
+licenses.

@@ -94,6 +94,9 @@ export default defineConfig({
 		host: true,
 	},
 	build: {
+		/** Hashed output must not share a directory with the unhashed
+		    `public/assets/` copies — `vercel.json` caches them differently. */
+		assetsDir: "_assets",
 		rollupOptions: {
 			input: generateLocaleEntries(),
 		},

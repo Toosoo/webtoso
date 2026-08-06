@@ -1,9 +1,8 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "headers": [
-    { "source": "/assets/:file", "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] },
-    { "source": "/assets/:dir/:path+", "headers": [{ "key": "Cache-Control", "value": "public, max-age=3600, must-revalidate" }] },
-    { "source": "/:dir(textures|matcaps|images)/:path+", "headers": [{ "key": "Cache-Control", "value": "public, max-age=3600, must-revalidate" }] }
+    { "source": "/_assets/:path+", "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] },
+    { "source": "/:dir(assets|textures|matcaps|images)/:path+", "headers": [{ "key": "Cache-Control", "value": "public, max-age=3600, must-revalidate" }] }
   ],
   "redirects": [
     { "source": "/:section(threejs|gsap|lab)", "destination": "/ar/:section/", "permanent": false },

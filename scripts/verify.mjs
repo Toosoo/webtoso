@@ -105,6 +105,8 @@ for (const item of allItems) {
 	/* Every root-absolute src/href must resolve to a file in dist. */
 	for (const [, ref] of html.matchAll(/(?:src|href)="(\/[^"]+)"/g)) {
 		const file = ref.split(/[?#]/)[0];
+		/* Vercel serves /_vercel/* at the edge — never present in dist. */
+		if (file.startsWith("/_vercel/")) continue;
 		if (!existsSync(resolve(dist, `.${file}`)))
 			deadRefs.push(`${item.url} → ${file}`);
 	}

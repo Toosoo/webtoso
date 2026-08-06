@@ -197,6 +197,21 @@ function tagsFor(meta, jsonLd, locale) {
 			attrs: { name: "twitter:image", content: abs(site.ogImage) },
 		},
 		{ tag: "meta", attrs: { name: "author", content: site.author } },
+		{
+			tag: "link",
+			attrs: {
+				rel: "icon",
+				type: "image/png",
+				sizes: "96x96",
+				href: "/favicon-96.png",
+			},
+		},
+		{
+			tag: "link",
+			attrs: { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
+		},
+		/* --color-canvas, hand-copied from hub.css like lessonChrome's colours. */
+		{ tag: "meta", attrs: { name: "theme-color", content: "#0f0d0e" } },
 	];
 
 	if (jsonLd) {
@@ -215,6 +230,13 @@ const chromeTag = () => ({
 	tag: "script",
 	attrs: { type: "module", src: "/src/lessonChrome.js" },
 	injectTo: "body",
+});
+
+/** Vercel Web Analytics. The endpoint exists only on deployments, so dev skips it. */
+const analyticsTag = () => ({
+	tag: "script",
+	attrs: { defer: true, src: "/_vercel/insights/script.js" },
+	injectTo: "head",
 });
 
 export function seo() {
@@ -243,14 +265,17 @@ export function seo() {
 					jsonLd = homeJsonLd(locale);
 				}
 
+				const tags = item
+					? [...tagsFor(meta, jsonLd, "en"), chromeTag()]
+					: tagsFor(meta, jsonLd, locale);
+				if (!ctx.server) tags.push(analyticsTag());
+
 				return {
 					html: html.replace(
 						/<title>[\s\S]*?<\/title>/,
 						`<title>${escapeHtml(meta.title)}</title>`,
 					),
-					tags: item
-						? [...tagsFor(meta, jsonLd, "en"), chromeTag()]
-						: tagsFor(meta, jsonLd, locale),
+					tags,
 				};
 			},
 		},
