@@ -232,6 +232,13 @@ const chromeTag = () => ({
 	injectTo: "body",
 });
 
+/** Vercel Web Analytics. The endpoint exists only on deployments, so dev skips it. */
+const analyticsTag = () => ({
+	tag: "script",
+	attrs: { defer: true, src: "/_vercel/insights/script.js" },
+	injectTo: "head",
+});
+
 export function seo() {
 	return {
 		name: "course-seo",
@@ -258,14 +265,17 @@ export function seo() {
 					jsonLd = homeJsonLd(locale);
 				}
 
+				const tags = item
+					? [...tagsFor(meta, jsonLd, "en"), chromeTag()]
+					: tagsFor(meta, jsonLd, locale);
+				if (!ctx.server) tags.push(analyticsTag());
+
 				return {
 					html: html.replace(
 						/<title>[\s\S]*?<\/title>/,
 						`<title>${escapeHtml(meta.title)}</title>`,
 					),
-					tags: item
-						? [...tagsFor(meta, jsonLd, "en"), chromeTag()]
-						: tagsFor(meta, jsonLd, locale),
+					tags,
 				};
 			},
 		},
