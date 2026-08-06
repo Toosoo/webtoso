@@ -197,6 +197,21 @@ function tagsFor(meta, jsonLd, locale) {
 			attrs: { name: "twitter:image", content: abs(site.ogImage) },
 		},
 		{ tag: "meta", attrs: { name: "author", content: site.author } },
+		{
+			tag: "link",
+			attrs: {
+				rel: "icon",
+				type: "image/png",
+				sizes: "96x96",
+				href: "/favicon-96.png",
+			},
+		},
+		{
+			tag: "link",
+			attrs: { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
+		},
+		/* --color-canvas, hand-copied from hub.css like lessonChrome's colours. */
+		{ tag: "meta", attrs: { name: "theme-color", content: "#0f0d0e" } },
 	];
 
 	if (jsonLd) {

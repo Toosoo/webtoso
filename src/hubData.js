@@ -78,7 +78,7 @@ export const hub = {
 			Icon: SiYoutube,
 		},
 		{
-			href: "https://github.com/Toosoo/threejs-course",
+			href: "https://github.com/Toosoo/webtoso",
 			label: "GitHub repository",
 			Icon: SiGithub,
 		},

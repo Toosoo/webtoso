@@ -49,9 +49,10 @@ chrome and the hub prose are translated.
 ## Running it
 
 ```bash
-npm install
-npm run dev      # http://localhost:3000
-npm run build    # -> dist/
+pnpm install
+pnpm dev        # http://localhost:3000
+pnpm build      # -> dist/
+pnpm check      # lint + build + post-build verification
 ```
 
 ## How it is put together
@@ -68,9 +69,10 @@ plugins/seo.js              per-page metadata, JSON-LD, sitemap, chrome injectio
 the sitemap, the course indexes and the chrome bar all derive from it — adding a
 lesson means a folder on disk and one entry in a content file.
 
-Each lesson is authored **once** and emitted per locale at build time, so
-`/ar/gsap/tween/` and `/en/gsap/tween/` come from the same source. Those
-generated `ar/` and `en/` trees are gitignored — **never edit them.**
+Each lesson builds **once**, in place, at `/<section>/<slug>/` — the folder on
+disk is the URL. Only the eight hub pages (the landing page and three course
+indexes) exist per locale under `/ar` + `/en`; those generated trees are
+gitignored — **never edit them.**
 
 Built with [Vite](https://vite.dev), [Tailwind CSS](https://tailwindcss.com),
 [GSAP](https://gsap.com) and [three.js](https://threejs.org). Deployed on Vercel.
