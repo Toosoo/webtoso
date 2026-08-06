@@ -79,9 +79,4 @@ export const lab = [
 		category: "sites",
 		youtubeUrl: watch("ipYpvV0IuK4", 11),
 	},
-	/*
-	 * Held back — unfinished. Uncomment to ship it; nothing else is needed.
-	 *
-	 * { slug: "lottie-scrolltrigger", title: "Lottie + ScrollTrigger", tags: ["gsap", "ScrollTrigger", "lottie"], category: "sites" },
-	 */
 ];
