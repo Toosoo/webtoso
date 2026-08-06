@@ -83,6 +83,12 @@ This is the companion repo to a YouTube channel rather than a general-purpose
 library, so it isn't looking for feature contributions — but corrections to a
 lesson, a broken link or a typo are welcome as issues.
 
+## License
+
+The code is here to learn from — clone it, run it, lift snippets into your own
+work. Republishing the courses or the site content as your own is not allowed.
+See [LICENSE](LICENSE).
+
 ---
 
 © [Ahmed Attia](https://www.youtube.com/@webtoso) — أحمد عطية
