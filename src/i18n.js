@@ -29,16 +29,16 @@ export const t = {
 
 		/** The root landing page. Three course cards, no lesson grid. */
 		home: {
-			title: "كورسات تفاعلية بالعربي — three.js و GSAP | webtoso",
+			title: "كورسات أنيميشن و 3D للويب بالعربي — three.js و GSAP | webtoso",
 			description:
-				"كورسات تفاعلية مجانية بالعربية في three.js و GSAP. كل درس صفحة شغالة تفتحها في متصفحك، ومعها شرح بالفيديو.",
-			heading: "كورسات تفاعلية بالعربي",
+				"كورسات مجانية بالعربي في three.js و GSAP. كل درس صفحة شغالة تفتحها في متصفحك وتقرا كودها كامل، ومعاها الشرح بالفيديو على يوتيوب.",
+			heading: "كورسات أنيميشن و 3D للويب",
 			subtitle: [
-				"three.js و GSAP بالعربي، من أول خطوة لحد مشهد كامل منشور.",
-				"كل درس بيشتغل في متصفحك على طول، والفيديو على بعد ضغطة.",
+				"three.js و GSAP بالعربي، مجانية بالكامل.",
+				"كل درس صفحة شغالة فعلاً — تفتحها، تقرا كود كل ملف فيها، وتنسخ اللي تحتاجه.",
+				"والفيديو على يوتيوب بيمشي معاك خطوة بخطوة.",
 			],
-			coursesHeading: "اختر كورس",
-			cardCta: "افتح الكورس",
+			cardCta: "افتح وجرّب",
 		},
 
 		filterLabel: "تصفية",
@@ -62,24 +62,25 @@ export const t = {
 				index: {
 					title: "كورس three.js بالعربي — دروس تفاعلية مجانية | webtoso",
 					description:
-						"كورس three.js تفاعلي ومجاني بالعربية. من أول مكعب يدور إلى الخامات والإضاءة، وكل درس يعمل مباشرة في متصفحك ومعه شرح بالفيديو.",
+						"من أول مكعب على الشاشة لحد مشهد كامل بخاماته وإضاءته — كل درس مشهد شغال بكوده كامل قدامك.",
 					heading: "كورس three.js بالعربي",
 					intro: [
-						"كورس three.js كامل بالعربي. هنبدأ من أول مكعب بيلف على الشاشة، وهنمشي خطوة خطوة لحد ما تبقى قادر تعمل مشهد ثلاثي الأبعاد كامل وتنشره.",
-						"كل درس هنا صفحة شغالة فعلاً — تفتحها، تلعب فيها، وتشوف الكود. والفيديو بيشرح الدرس على يوتيوب.",
+						"كورس three.js كامل بالعربي. هنبدأ من أول مكعب على الشاشة، وهنمشي خطوة خطوة لحد مشهد ثلاثي الأبعاد كامل بخاماته وإضاءته.",
+						"كل درس صفحة شغالة فعلاً — تفتحها، تقرا كود كل ملف فيها، وتنسخ اللي تحتاجه. والفيديو على يوتيوب ماشي معاك خطوة بخطوة.",
 					],
-					learnHeading: "ما ستتعلمه",
+					learnHeading: "هتتعلم إيه",
 					learn: [
 						"إعداد المشهد: الكاميرا، الرندرر، وحلقة الرسم",
 						"الأشكال والـ geometry، وبناء buffer geometry بنفسك",
 						"التحكم في الكاميرا والتعامل مع تغيّر حجم الشاشة",
 						"الخامات والـ materials وأنواعها",
+						"أدوات الـ debug: lil-gui و stats.js",
 						"الخامات المصوّرة (textures) وتحميلها بـ loading manager",
 						"الإضاءة وأنواعها وتأثيرها على الخامات",
 					],
-					prereqHeading: "المتطلبات",
+					prereqHeading: "محتاج تعرف إيه قبلها",
 					prereq:
-						"محتاج JavaScript أساسي بس — متغيرات، دوال، و DOM. مش لازم تكون عارف حاجة عن الجرافيكس أو الرياضيات المتقدمة، هنشرح اللي محتاجينه أول بأول.",
+						"JavaScript أساسي بس — متغيرات، دوال، و DOM. مش لازم تكون عارف أي حاجة عن الجرافيكس ولا رياضيات متقدمة، اللي محتاجه هتلاقيه متشرح أول بأول.",
 				},
 				itemDescription:
 					"{title} — الدرس {n} من كورس three.js تفاعلي ومجاني بالعربية. شغّل المشهد مباشرة في متصفحك وشاهد الشرح بالفيديو.",
@@ -96,24 +97,24 @@ export const t = {
 				index: {
 					title: "كورس GSAP بالعربي — دروس تفاعلية مجانية | webtoso",
 					description:
-						"كورس GSAP تفاعلي ومجاني بالعربية. من الـ tween الأول إلى ScrollTrigger و SplitText و MorphSVG، وكل درس يعمل مباشرة في متصفحك.",
+						"من أول tween لحد السكرول والإضافات اللي بتخلّيك تبص لموقع وتقول «إزاي عملوا ده» — كله شغال قدامك في المتصفح.",
 					heading: "كورس GSAP بالعربي",
 					intro: [
 						"كورس GSAP كامل بالعربي. هنبدأ من أبسط tween، ونوصل لأنيميشن السكرول والإضافات اللي بتتعمل بيها المواقع اللي بتشوفها وتقول إزاي عملوا ده.",
-						"كل درس صفحة شغالة تفتحها وتجرّب فيها بنفسك، ومعاها الفيديو على يوتيوب.",
+						"كل درس صفحة شغالة تفتحها وتجرّب فيها بنفسك، وتقرا كودها كامل. والفيديو على يوتيوب ماشي معاك خطوة بخطوة.",
 					],
-					learnHeading: "ما ستتعلمه",
+					learnHeading: "هتتعلم إيه",
 					learn: [
-						"الأساسيات: tween، stagger، ease، و timeline",
+						"الأساسيات: tween، stagger، ease، timeline، و keyframes",
 						"التحكم الدقيق: immediateRender، matchMedia، quickTo",
 						"أنيميشن السكرول بـ ScrollTrigger و ScrollSmoother",
 						"الإضافات: SplitText، MorphSVG، MotionPath، Draggable",
 						"الفيزياء والحركة بـ Physics2D و Inertia",
 						"استخدام GSAP جوه React بـ useGSAP",
 					],
-					prereqHeading: "المتطلبات",
+					prereqHeading: "محتاج تعرف إيه قبلها",
 					prereq:
-						"JavaScript أساسي و CSS. لو تعرف تكتب selector وتغيّر خاصية بالـ CSS، تقدر تبدأ من أول درس على طول.",
+						"JavaScript أساسي و CSS. لو بتعرف تكتب selector وتغيّر property في CSS، تقدر تبدأ من أول درس على طول.",
 				},
 				itemDescription:
 					"{title} — الدرس {n} من كورس GSAP تفاعلي ومجاني بالعربية. جرّب الأنيميشن مباشرة في متصفحك وشاهد الشرح بالفيديو.",
@@ -140,13 +141,13 @@ export const t = {
 				index: {
 					title: "أمثلة تفاعلية بالعربي — three.js و GSAP | webtoso",
 					description:
-						"أمثلة تفاعلية جاهزة مبنية بـ GSAP و three.js: أنيميشن سكرول، مكوّنات، ومواقع كاملة. افتح أي مثال وجرّبه في متصفحك.",
+						"مش دروس — شغل كامل ومتشطّب بيوري الحاجات دي وهي شغالة مع بعض. افتح أي واحد واقرا الكود.",
 					heading: "أمثلة تفاعلية",
 					intro: [
-						"دي مش دروس — دي أمثلة كاملة ومتشطّبة، كل واحد منها بيوري الحاجات اللي اتشرحت في الكورسات وهي شغّالة مع بعض.",
-						"افتح أي مثال، جرّبه، واتفرّج على الكود.",
+						"دي مش دروس — دي أمثلة كاملة ومتشطّبة، كل واحدة بتوريك الحاجات اللي اتشرحت في الكورسات وهي شغّالة مع بعض.",
+						"افتح أي مثال، جرّبه، واقرا كوده كامل ملف ملف.",
 					],
-					learnHeading: "ما ستجده هنا",
+					learnHeading: "فيه إيه هنا",
 					learn: [
 						"أنيميشن سكرول كامل من أول ما تنزل لحد آخر الصفحة",
 						"مكوّنات صغيرة تقدر تاخدها وتستخدمها على طول",
@@ -154,7 +155,7 @@ export const t = {
 					],
 					prereqHeading: "قبل ما تبدأ",
 					prereq:
-						"الأمثلة دي بتفترض إنك خدت أساسيات GSAP. لو لسه بتبدأ، ابدأ بكورس GSAP الأول.",
+						"الأمثلة دي بتفترض إنك خدت أساسيات GSAP. لو لسه بتبدأ، ابدأ بكورس GSAP الأول وبعدين ارجعلها.",
 				},
 				itemDescription:
 					"{title} — مثال تفاعلي مبني بـ GSAP بالعربية. افتحه مباشرة في متصفحك وشاهد الكود.",
@@ -192,16 +193,16 @@ export const t = {
 		switchLocaleAriaLabel: "Switch to Arabic",
 
 		home: {
-			title: "Interactive three.js & GSAP courses in Arabic | webtoso",
+			title: "Web animation & 3D courses in Arabic — three.js & GSAP | webtoso",
 			description:
-				"Free interactive courses in three.js and GSAP. Every lesson runs live in your browser and has a video walkthrough.",
-			heading: "Interactive courses in Arabic",
+				"Free three.js and GSAP courses taught in Arabic. Every lesson runs in your browser with its full source on the page, plus a video walkthrough.",
+			heading: "Web animation & 3D courses",
 			subtitle: [
-				"three.js and GSAP, from the first step to a deployed scene.",
-				"Every lesson runs in your browser; the video sits one click behind it.",
+				"three.js and GSAP, taught in Arabic, free.",
+				"Every lesson is a page that actually runs — open it, read the source of every file in it, and copy what you need.",
+				"The video on YouTube walks you through it step by step.",
 			],
-			coursesHeading: "Pick a course",
-			cardCta: "Open course",
+			cardCta: "Open and try it",
 		},
 
 		filterLabel: "Filter",
@@ -212,7 +213,7 @@ export const t = {
 
 		sections: {
 			threejs: {
-				label: "three.js course",
+				label: "three.js",
 				categories: {
 					foundations: "Foundations",
 					"textures-light": "Textures & Lights",
@@ -220,11 +221,11 @@ export const t = {
 				index: {
 					title: "three.js course — free interactive lessons | webtoso",
 					description:
-						"A free, interactive three.js course. From a first rotating cube to textures and lights, with every lesson running live in your browser.",
+						"From a first cube on screen to a full scene with materials and lights — each lesson a scene that runs, with its full source on the page.",
 					heading: "three.js course",
 					intro: [
-						"A complete three.js course. It starts with a single cube rotating on screen and works step by step towards a full 3D scene you can deploy.",
-						"Every lesson here is a page that actually runs — open it, play with it, read the code. The video walks through it on YouTube.",
+						"A complete three.js course. It starts with a single cube on screen and works step by step towards a full 3D scene with its own materials and lights.",
+						"Every lesson is a page that actually runs — open it, read the source of every file in it, and copy what you need. The video walks you through it on YouTube.",
 					],
 					learnHeading: "What you'll learn",
 					learn: [
@@ -232,10 +233,11 @@ export const t = {
 						"Geometry, and building a buffer geometry by hand",
 						"Camera controls and handling viewport resizes",
 						"Materials and how each type responds to light",
+						"Debug tooling: lil-gui and stats.js",
 						"Textures, and loading them through a loading manager",
 						"Lights, their types, and how they read on a material",
 					],
-					prereqHeading: "Prerequisites",
+					prereqHeading: "What you need first",
 					prereq:
 						"Basic JavaScript — variables, functions, the DOM. No graphics background and no advanced maths required; the parts you need are explained as they come up.",
 				},
@@ -254,22 +256,22 @@ export const t = {
 				index: {
 					title: "GSAP course — free interactive lessons | webtoso",
 					description:
-						"A free, interactive GSAP course. From your first tween to ScrollTrigger, SplitText and MorphSVG, with every lesson running live in your browser.",
+						"From your first tween to the scroll animation and plugins behind the sites that make you ask how they did that.",
 					heading: "GSAP course",
 					intro: [
 						"A complete GSAP course. It starts with the simplest possible tween and reaches the scroll animation and plugins behind the sites that make you ask how they did that.",
-						"Every lesson is a live page you can open and experiment in, with the video on YouTube.",
+						"Every lesson is a live page you can open and experiment in, with its full source on the page and the video on YouTube.",
 					],
 					learnHeading: "What you'll learn",
 					learn: [
-						"The core: tween, stagger, ease and timeline",
+						"The core: tween, stagger, ease, timeline and keyframes",
 						"Fine control: immediateRender, matchMedia, quickTo",
 						"Scroll animation with ScrollTrigger and ScrollSmoother",
 						"Plugins: SplitText, MorphSVG, MotionPath, Draggable",
 						"Physics and momentum with Physics2D and Inertia",
 						"Using GSAP inside React with useGSAP",
 					],
-					prereqHeading: "Prerequisites",
+					prereqHeading: "What you need first",
 					prereq:
 						"Basic JavaScript and CSS. If you can write a selector and change a property, you can start from the first lesson.",
 				},
@@ -289,11 +291,11 @@ export const t = {
 				index: {
 					title: "Interactive demos — three.js & GSAP | webtoso",
 					description:
-						"Finished interactive demos built with GSAP and three.js: scroll animation, components and full sites. Open any demo and run it in your browser.",
+						"Not lessons — finished pieces showing everything working together. Open any of them and read the code.",
 					heading: "Interactive demos",
 					intro: [
 						"These aren't lessons — they're finished pieces, each one showing the things taught in the courses working together.",
-						"Open any demo, try it, and read the code.",
+						"Open any demo, try it, and read its full source file by file.",
 					],
 					learnHeading: "What's here",
 					learn: [

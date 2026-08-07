@@ -110,6 +110,17 @@ const providerFor = (locale) => ({
 	url: abs(localePath(locale, "/")),
 });
 
+/**
+ * Google reads schema.org and og:image as two separate thumbnail sources; the
+ * hub pages carry no <img>, so this markup is the only one it can pick from.
+ */
+const ogImageObject = () => ({
+	"@type": "ImageObject",
+	url: abs(site.ogImage),
+	width: 1200,
+	height: 630,
+});
+
 /** A CollectionPage whose parts are the three Courses. */
 function homeJsonLd(locale) {
 	const copy = t[locale];
@@ -121,12 +132,15 @@ function homeJsonLd(locale) {
 		description: copy.home.description,
 		url: abs(localePath(locale, "/")),
 		inLanguage: locale,
+		image: ogImageObject(),
+		primaryImageOfPage: ogImageObject(),
 		hasPart: sections.map((section) => ({
 			"@type": "Course",
 			name: copy.sections[section.id].index.heading,
 			description: copy.sections[section.id].index.description,
 			url: abs(localePath(locale, sectionPath(section.id))),
 			inLanguage: locale,
+			image: ogImageObject(),
 			isAccessibleForFree: true,
 			provider: providerFor(locale),
 		})),
@@ -146,6 +160,8 @@ function sectionJsonLd(sectionId, locale) {
 		description: indexCopy.description,
 		url: abs(localePath(locale, sectionPath(sectionId))),
 		inLanguage: locale,
+		image: ogImageObject(),
+		primaryImageOfPage: ogImageObject(),
 		isAccessibleForFree: true,
 		provider: providerFor(locale),
 		hasPart: items.map((item) => ({
@@ -197,6 +213,12 @@ function tagsFor(meta, jsonLd, locale) {
 			attrs: { name: "twitter:image", content: abs(site.ogImage) },
 		},
 		{ tag: "meta", attrs: { name: "author", content: site.author } },
+		/* Google only reads icons declared at the hostname root, and only follows
+		   <link> — public/favicon.ico existed but nothing pointed at it. */
+		{
+			tag: "link",
+			attrs: { rel: "icon", sizes: "32x32", href: "/favicon.ico" },
+		},
 		{
 			tag: "link",
 			attrs: {
