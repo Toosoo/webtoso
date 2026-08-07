@@ -1,93 +1,81 @@
 # webtoso
 
-**كورسات تفاعلية بالعربي — three.js و GSAP**
-Interactive three.js & GSAP courses, in Arabic.
+<div dir="rtl">
 
-Every lesson is a real page that runs in your browser, paired with a video
-walkthrough on YouTube. The site is static, bilingual (`/ar` + `/en`), and has
-no backend.
+**كورسات أنيميشن و 3D للويب بالعربي**
+
+</div>
+
+Web animation & 3D courses, taught in Arabic.
 
 [YouTube](https://www.youtube.com/@webtoso) · [Telegram](https://t.me/webtoso) · [Instagram](https://www.instagram.com/not.toso)
 
 ---
 
+> [!NOTE]
+> <div dir="rtl">
+>
+> **قبل ما تبدأ** — الريبو ده اتجمّع من كذا ريبو ومن ملفات محلية متفرقة، فوارد جدًا تلاقي درس بايظ أو شكله مش زي اللي في الفيديو. لو قابلك حاجة زي دي، ابعتلي [issue](https://github.com/Toosoo/webtoso/issues) وأنا أظبطها. ولو فيه حاجة ناقصة نفسك تشوفها، قول عليها برضه — مش هتزعّلني، بالعكس.
+>
+> </div>
+>
+> **Heads up** — this repo was merged together from several separate repos and scattered local folders, so a lesson may well be broken or may not match its video. If you run into one, please [open an issue](https://github.com/Toosoo/webtoso/issues) and I'll fix it. And if something you'd like to see is missing, say so — that's welcome too.
+
+---
+
+<div dir="rtl">
+
 ## بالعربي
 
-كورسات تفاعلية مجانية بالعربية في three.js و GSAP. كل درس صفحة شغالة تفتحها في
-متصفحك وتجرّب فيها بنفسك، ومعاها الشرح بالفيديو على يوتيوب.
+كورسات مجانية بالعربي في three.js و GSAP. كل درس صفحة شغالة تفتحها في متصفحك وتقرا كودها كامل، ومعاها الشرح بالفيديو على يوتيوب.
 
 الموقع مقسوم لثلاثة أقسام:
 
-- **كورس three.js** — من أول مكعب بيلف على الشاشة لحد مشهد كامل: الأشكال،
-  الكاميرا، الخامات، الإضاءة.
-- **كورس GSAP** — من أبسط tween لحد أنيميشن السكرول والإضافات: ScrollTrigger،
-  SplitText، MorphSVG، Draggable وغيرها.
+- **كورس three.js** — من أول مكعب على الشاشة لحد مشهد كامل بخاماته وإضاءته.
+- **كورس GSAP** — من أول tween لحد السكرول والإضافات اللي بتخلّيك تبص لموقع وتقول «إزاي عملوا ده».
 - **أمثلة** — مش دروس، دي شغل كامل ومتشطّب بيوري الحاجات دي وهي شغالة مع بعض.
 
-المحتوى التقني (أسماء الدروس، الكود، أسماء المكتبات) بيفضل بالإنجليزي في
-اللغتين — ده اللي بيتكتب فعلاً في الشغل، والبحث الحقيقي بيخلط اللغتين.
+**الأدوات اللي بنشتغل بيها:** GSAP، three.js، Blender، React Three Fiber، drei، lamina، وغيرها.
+
+المحتوى التقني (أسماء الدروس، الكود، أسماء المكتبات) بيفضل بالإنجليزي في اللغتين — ده اللي بيتكتب فعلاً في الشغل، والبحث الحقيقي بيخلط اللغتين.
+
+</div>
 
 ---
 
 ## In English
 
-Free, interactive courses in three.js and GSAP, taught in Arabic. Each lesson is
-a working page rather than a code listing — open it, change things, read the
-source. The video sits one click behind it.
+Free three.js and GSAP courses, taught in Arabic. Every lesson runs in your browser with its full source on the page, plus a video walkthrough on YouTube.
 
 Three sections:
 
-- **three.js course** — scene setup, geometry, cameras, materials, textures, lights
-- **GSAP course** — tweens, timelines, scroll animation, and the plugin set
-- **Lab** — finished demos rather than lessons
+- **three.js course** — from a first cube on screen to a full scene with materials and lights.
+- **GSAP course** — from your first tween to the scroll animation and plugins behind the sites that make you ask how they did that.
+- **Lab** — finished pieces rather than lessons, each showing the things taught in the courses working together.
 
-Lesson names, code and library names stay English in both locales; only the UI
-chrome and the hub prose are translated.
+**Tools we work with:** GSAP, three.js, Blender, React Three Fiber, drei, lamina, and more.
+
+Lesson names, code and library names stay English in both locales; only the UI chrome and the hub prose are translated.
 
 ---
 
 ## Running it
 
+Either package manager works — pnpm is what the lockfile is written for.
+
 ```bash
-pnpm install
-pnpm dev        # http://localhost:3000
-pnpm build      # -> dist/
-pnpm check      # lint + build + post-build verification
+pnpm install      # or: npm install
+pnpm dev          # or: npm run dev    → http://localhost:3000
+pnpm build        # or: npm run build
 ```
-
-## How it is put together
-
-```
-src/content/<section>.js    the manifest: slug, title, tags, category, video
-src/                        the hub app (React) + the lesson chrome bar
-threejs|gsap|lab/<slug>/    the lessons, one folder each — authored once
-public/assets/<slug>/       lesson assets, namespaced per lesson
-plugins/seo.js              per-page metadata, JSON-LD, sitemap, chrome injection
-```
-
-`src/content/index.js` is the spine. Entry points, SEO metadata, hreflang pairs,
-the sitemap, the course indexes and the chrome bar all derive from it — adding a
-lesson means a folder on disk and one entry in a content file.
-
-Each lesson builds **once**, in place, at `/<section>/<slug>/` — the folder on
-disk is the URL. Only the eight hub pages (the landing page and three course
-indexes) exist per locale under `/ar` + `/en`; those generated trees are
-gitignored — **never edit them.**
-
-Built with [Vite](https://vite.dev), [Tailwind CSS](https://tailwindcss.com),
-[GSAP](https://gsap.com) and [three.js](https://threejs.org). Deployed on Vercel.
 
 ## Contributing
 
-This is the companion repo to a YouTube channel rather than a general-purpose
-library, so it isn't looking for feature contributions — but corrections to a
-lesson, a broken link or a typo are welcome as issues.
+This is the companion repo to a YouTube channel rather than a general-purpose library, so it isn't looking for feature contributions — but a broken lesson, a dead link or a typo is always welcome as an issue.
 
 ## License
 
-The code is here to learn from — clone it, run it, lift snippets into your own
-work. Republishing the courses or the site content as your own is not allowed.
-See [LICENSE](LICENSE).
+The code is here to learn from — clone it, run it, lift snippets into your own work. Republishing the courses or the site content as your own is not allowed. See [LICENSE](LICENSE).
 
 ---
 
