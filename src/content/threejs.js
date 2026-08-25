@@ -88,7 +88,7 @@ export const threejs = [
       slug: "shadows",
       title: "Shadows",
       youtubeUrl:
-        "https://www.youtube.com/watch?v=O5_xHGmtCrE&list=PLVFwdndx21r7HzdqCq6pZbuJXtsyyjSc4&index=12",
+        "https://www.youtube.com/watch?v=KYQTxiM_2jo&list=PLVFwdndx21r7HzdqCq6pZbuJXtsyyjSc4&index=13",
       tags: ["three.js"],
       category: "textures-light",
     },
