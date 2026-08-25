@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/src/global-style.css">
+    <title></title>
+    <style>
+        /* fullscreen: true sizes the drawing buffer from this box */
+        canvas {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body class="size-full bg-black relative px-20 min-h-[500vh]">
+   
+
+  <canvas id="tree-frames" width="1920" height="1080"></canvas>
+
+  <section class="hero h-screen relative z-1 flex items-center justify-between gap-10">
+    <div class="tf-block tf-left max-w-sm rounded-2xl bg-white/60 p-8 backdrop-blur-md">
+      <h2 class="text-4xl font-bold text-neutral-900">Rooted in motion</h2>
+      <p class="mt-4 text-lg text-neutral-700">Every frame is a still image. Scroll ties them to
+        your position on the page, so the tree grows exactly as fast as you do.</p>
+    </div>
+
+    <div class="tf-block tf-right max-w-sm rounded-2xl bg-white/60 p-8 backdrop-blur-md">
+      <h2 class="text-4xl font-bold text-neutral-900">Sixty frames</h2>
+      <p class="mt-4 text-lg text-neutral-700">The whole sequence is sixty AVIF stills, preloaded
+        once and painted to a single canvas that follows the size of the window.</p>
+    </div>
+  </section>
+
+    <script type="module" src="./main.js"></script>
+</body>
+
+</html>

@@ -29,3 +29,6 @@ dist-ssr
 
 # Working plan — local only, carries absolute paths and internal notes
 /PLAN.md
+
+# Agent rules — local only
+/CLAUDE.md

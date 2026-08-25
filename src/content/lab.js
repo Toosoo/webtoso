@@ -1,10 +1,4 @@
-/**
- * Finished demos, not lessons. Same rules as the courses. Array order follows
- * the category order in `i18n.sections.lab.categories`. `youtubeUrl` is
- * optional — the card and the chrome bar both handle its absence.
- */
 
-/** The demos playlist — a different one from the GSAP course. */
 const LIST = "PLVFwdndx21r5hbVzLXEJNu5Ea-FvDxwmT";
 
 const watch = (id, index) =>
@@ -67,11 +61,6 @@ export const lab = [
 		category: "sites",
 		youtubeUrl: watch("Sy11oO9p1Jo", 2),
 	},
-	/**
-	 * The only piece on the site that uses three.js and GSAP together, which is
-	 * why it lives in the lab rather than in either course. Its matcap comes from
-	 * the shared `public/matcaps/` set — matcap-6, one of the 5–18 kept on purpose.
-	 */
 	{
 		slug: "abstract-hero",
 		title: "Abstract hero",
@@ -79,4 +68,11 @@ export const lab = [
 		category: "sites",
 		youtubeUrl: watch("ipYpvV0IuK4", 11),
 	},
+	// {
+	// 	slug: "tree-frames",
+	// 	title: "Tree frames",
+	// 	tags: ["gsap", "ScrollTrigger"],
+	// 	category: "scroll",
+	// 	youtubeUrl: watch("GZ02PXb7aXo", 10),
+	// },
 ];
