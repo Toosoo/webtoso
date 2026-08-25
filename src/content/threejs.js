@@ -76,12 +76,20 @@ export const threejs = [
 		tags: ["three.js"],
 		category: "textures-light",
 	},
-	{
-		slug: "lights",
-		title: "Lights",
-		youtubeUrl:
-			"https://www.youtube.com/watch?v=O5_xHGmtCrE&list=PLVFwdndx21r7HzdqCq6pZbuJXtsyyjSc4&index=12",
-		tags: ["three.js"],
-		category: "textures-light",
-	},
+    {
+      slug: "lights",
+      title: "Lights",
+      youtubeUrl:
+        "https://www.youtube.com/watch?v=O5_xHGmtCrE&list=PLVFwdndx21r7HzdqCq6pZbuJXtsyyjSc4&index=12",
+      tags: ["three.js"],
+      category: "textures-light",
+    },
+    {
+      slug: "shadows",
+      title: "Shadows",
+      youtubeUrl:
+        "https://www.youtube.com/watch?v=O5_xHGmtCrE&list=PLVFwdndx21r7HzdqCq6pZbuJXtsyyjSc4&index=12",
+      tags: ["three.js"],
+      category: "textures-light",
+    },
 ];

@@ -7,16 +7,6 @@ import {
 	t,
 } from "./i18n.js";
 
-/**
- * Small fixed bar at the top of every lesson page.
- *
- *     ⌂ │ ‹  07 · KEYFRAMES  ›
- *
- * Styles are self-contained rather than Tailwind, so it renders identically on
- * the two React lessons, which load no stylesheet at all.
- */
-
-/* Colours are hand-copied from hub.css `@theme` — nothing syncs them. */
 const CSS = `
 .lesson-chrome {
 	position: fixed;
