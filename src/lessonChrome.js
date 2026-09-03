@@ -68,12 +68,16 @@ a.lesson-chrome__step:hover,
 
 /* A <button> in a bar of links: it inherits none of the reset the others get. */
 .lesson-chrome__code {
-	width: 34px;
-	padding: 0;
+	padding: 0 10px;
 	border: 0;
 	background: none;
 	cursor: pointer;
-	font: inherit;
+	font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+		monospace;
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 1;
+	white-space: nowrap;
 }
 
 .lesson-chrome__step {
@@ -130,6 +134,10 @@ a.lesson-chrome__step:hover,
 		letter-spacing: 0.12em;
 		padding: 0 9px;
 	}
+
+	.lesson-chrome__code {
+		padding: 0 8px;
+	}
 }
 `;
 
@@ -149,11 +157,7 @@ const PREV_ICON = chevron("M9.8 3.6 5.4 8l4.4 4.4");
 const NEXT_ICON = chevron("M6.2 3.6 10.6 8l-4.4 4.4");
 
 /** Not mirrored under /ar: `</>` reads left-to-right in every locale. */
-const CODE_ICON = `<svg viewBox="0 0 16 16" width="15" height="15" fill="none"
-	stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-	stroke-linejoin="round" aria-hidden="true">
-	<path d="M6 3.4 2.2 8 6 12.6M10 3.4 13.8 8 10 12.6" />
-</svg>`;
+const CODE_ICON = "&lt;Code/&gt;";
 
 /** Attribute-safe: titles reach `aria-label`, and some carry an `&`. */
 const esc = (value) =>
@@ -242,7 +246,7 @@ function mount() {
 		</span>
 		${step(next, NEXT_ICON, copy.nextAriaLabel)}
 		<span class="lesson-chrome__divider"></span>
-		<button type="button" class="lesson-chrome__code"
+		<button type="button" class="lesson-chrome__code" dir="ltr"
 			aria-label="${esc(copy.codeAriaLabel)}" title="${esc(copy.codeAriaLabel)}">
 			${CODE_ICON}
 		</button>
