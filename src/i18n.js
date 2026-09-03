@@ -58,6 +58,7 @@ export const t = {
 				categories: {
 					foundations: "الأساسيات",
 					"textures-light": "الخامات والإضاءة",
+					animations: "الانيميشن",
 				},
 				index: {
 					title: "كورس three.js بالعربي — دروس تفاعلية مجانية | webtoso",
@@ -217,6 +218,7 @@ export const t = {
 				categories: {
 					foundations: "Foundations",
 					"textures-light": "Textures & Lights",
+					animations: "Animations",
 				},
 				index: {
 					title: "three.js course — free interactive lessons | webtoso",

@@ -92,4 +92,12 @@ export const threejs = [
       tags: ["three.js"],
       category: "textures-light",
     },
+    {
+      slug: "particles",
+      title: "Particles",
+      youtubeUrl:
+        "https://www.youtube.com/watch?v=rqNsWRHK2lI&list=PLVFwdndx21r7HzdqCq6pZbuJXtsyyjSc4&index=14",
+      tags: ["three.js"],
+      category: "animations",
+    },
 ];
