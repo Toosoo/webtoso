@@ -1,4 +1,3 @@
-
 const LIST = "PLVFwdndx21r5hbVzLXEJNu5Ea-FvDxwmT";
 
 const watch = (id, index) =>
