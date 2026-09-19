@@ -97,7 +97,7 @@ export const threejs = [
 		title: "Particles",
 		youtubeUrl:
 			"https://www.youtube.com/watch?v=rqNsWRHK2lI&list=PLVFwdndx21r7HzdqCq6pZbuJXtsyyjSc4&index=14",
-		tags: ["three.js","gsap","stats.js"],
+		tags: ["three.js", "gsap", "stats.js"],
 		category: "animations",
 	},
 	{
@@ -105,7 +105,7 @@ export const threejs = [
 		title: "Raycaster",
 		youtubeUrl:
 			"https://www.youtube.com/watch?v=JMkJ8bhbmBg&list=PLVFwdndx21r7HzdqCq6pZbuJXtsyyjSc4&index=15",
-		tags: ["three.js","gsap"],
+		tags: ["three.js", "gsap"],
 		category: "animations",
 	},
 ];
