@@ -66,12 +66,5 @@ export const lab = [
 		tags: ["gsap", "ScrollTrigger", "three.js", "lil-gui"],
 		category: "sites",
 		youtubeUrl: watch("ipYpvV0IuK4", 11),
-	},
-	// {
-	// 	slug: "tree-frames",
-	// 	title: "Tree frames",
-	// 	tags: ["gsap", "ScrollTrigger"],
-	// 	category: "scroll",
-	// 	youtubeUrl: watch("GZ02PXb7aXo", 10),
-	// },
+	}
 ];
