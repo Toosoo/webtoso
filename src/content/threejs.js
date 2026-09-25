@@ -108,4 +108,11 @@ export const threejs = [
 		tags: ["three.js", "gsap"],
 		category: "animations",
 	},
+	{
+		slug: "instances",
+		title: "Instances",
+    youtubeUrl:"https://www.youtube.com/watch?v=kFPwhYbj5xA&list=PLVFwdndx21r7HzdqCq6pZbuJXtsyyjSc4&index=16",
+		tags: ["three.js","gsap",'stats'],
+		category: "animations",
+	},
 ];
