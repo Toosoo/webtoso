@@ -46,5 +46,10 @@
 		"tailwind-merge": "^3.6.0",
 		"tailwindcss": "^4.3.3",
 		"three": "^0.185.1"
+	},
+	"pnpm": {
+		"overrides": {
+			"nanoid": "5.1.16"
+		}
 	}
 }
