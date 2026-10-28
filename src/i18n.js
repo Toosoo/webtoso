@@ -135,9 +135,9 @@ export const t = {
 					other: "مثال",
 				},
 				categories: {
-					scroll: "السكرول",
-					components: "مكونات",
-					sites: "مواقع",
+					gsap: "GSAP",
+					threejs: "three.js",
+					"gsap-threejs": "GSAP و three.js",
 				},
 				index: {
 					title: "أمثلة تفاعلية بالعربي — three.js و GSAP | webtoso",
@@ -286,9 +286,9 @@ export const t = {
 				itemWord: "Demo",
 				itemNoun: { one: "demo", other: "demos" },
 				categories: {
-					scroll: "Scroll",
-					components: "Components",
-					sites: "Sites",
+					gsap: "GSAP",
+					threejs: "three.js",
+					"gsap-threejs": "GSAP & three.js",
 				},
 				index: {
 					title: "Interactive demos — three.js & GSAP | webtoso",

@@ -90,7 +90,7 @@ export default defineConfig({
 	appType: "mpa",
 	plugins: [react(), tailwindcss(), rootRedirect(), seo(), prerender()],
 	server: {
-		port: 3000,
+		port: 4321,
 		host: true,
 	},
 	build: {
